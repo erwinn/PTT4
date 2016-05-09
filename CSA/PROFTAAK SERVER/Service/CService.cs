@@ -14,6 +14,7 @@ namespace Service
         public string RecieveMessage()
         {
             throw new NotImplementedException();
+            //HOI
         }
 
         public string SendMessage(string message)

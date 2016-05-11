@@ -4,7 +4,7 @@ long TimeOfLastMeasurement = 0;
 
 void RefreshRPM()
 {
-  int Val = analogRead(SpeedSensor);
+  int Val = analogRead(SpeedSensorPin);
   bool isBlocked;
   if (Val > 700) isBlocked = true;
   else if (Val < 200)isBlocked = false;

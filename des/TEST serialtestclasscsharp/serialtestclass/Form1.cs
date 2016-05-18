@@ -79,6 +79,12 @@ namespace serialtestclass{
         private void timer2_Tick(object sender, EventArgs e)
         {
             sendCmd("datarequest");
+           
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            sendCmd("turnon");
         }
         /*/
         private void DataReceivedHandler(

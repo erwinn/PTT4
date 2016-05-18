@@ -17,6 +17,8 @@ MCP2515 can;
 
 void setup()
 {
+pinMode(8, OUTPUT);
+pinMode(7, OUTPUT);
  
 
   Serial.begin(9600); 
@@ -59,10 +61,26 @@ void readincoming()
       message ="datatransmitter1 "+String(datatransmitter1);
       Serial.println(message);
     }   
+    if(s=="turnon")
+    {
+      turnon();
+    }
     //////////////////
     s="";
   }
 }
+
+void turnon()
+{
+  digitalWrite(8,HIGH);
+  digitalWrite(7,HIGH);
+
+  delay(1500);
+  digitalWrite(8,LOW);
+  digitalWrite(7,LOW);
+}
+
+
 void loop()
 {
  

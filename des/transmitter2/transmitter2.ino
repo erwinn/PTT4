@@ -17,14 +17,15 @@ void setup()
   if(can.initCAN(CAN_BAUD_100K) == 0)
   {
     Serial.println("initCAN() failed");
+ 
     while(1);
   }
   if(can.setCANNormalMode(LOW) == 0) //normal mode non single shot
   {
     Serial.println("setCANNormalMode() failed");
+   
     while(1);
   }
-  delay(delaynr/2);
 }
 
 
@@ -33,7 +34,7 @@ void loop()
   //MODE == 1
   //transmitter
   int value = analogRead(ldr)/4;
-  msg.adrsValue = 0x7d1;
+  msg.adrsValue = 0x7d2;
   msg.isExtendedAdrs = false;
   msg.rtr = false;
   msg.dataLength = 1;

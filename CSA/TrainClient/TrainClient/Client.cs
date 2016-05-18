@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using TrainClient.TrainService;
 
 namespace TrainClient
 {
     public class Client
     {
+        private TrainServiceClient proxy;
+
         public Client()
         {
-
+            proxy = new TrainServiceClient();
         }
 
         public void Refresh()
@@ -30,7 +34,7 @@ namespace TrainClient
 
         public void StopTrain(int trainId)
         {
-
+            
         }
 
         public bool WriteSensorState(bool state, int sensor)

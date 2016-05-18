@@ -15,7 +15,7 @@ namespace TrainService
             throw new NotImplementedException();
         }
 
-        public string MessageBuilder(int value, string MessageType)
+        public string MessageBuilder(int id, int value, string MessageType)
         {
             throw new NotImplementedException();
         }

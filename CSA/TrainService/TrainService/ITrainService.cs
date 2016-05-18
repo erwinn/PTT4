@@ -7,17 +7,22 @@ using System.Text;
 
 namespace TrainService
 {
-    [ServiceContract]
+    [ServiceContract(Namespace = "TrainService")]
     public interface ITrainService
     {
-        string MessageBuilder(int value, string MessageType);
+        [OperationContract]
+        string MessageBuilder(int id, int value, string MessageType);
 
+        [OperationContract]
         bool MessageCollect();
 
+        [OperationContract]
         void MessageSendArduino(string message);
 
+        [OperationContract]
         void MessageSendPLC(string message);
 
+        [OperationContract]
         void Error();
     }
 }

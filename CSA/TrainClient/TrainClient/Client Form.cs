@@ -12,9 +12,12 @@ namespace TrainClient
 {
     public partial class Form1 : Form
     {
+        private Client client;
+
         public Form1()
         {
             InitializeComponent();
+            client = new Client();
         }
     }
 }

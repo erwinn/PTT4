@@ -10,13 +10,14 @@ namespace TrainService
     [ServiceContract]
     public interface ITrainService
     {
-        
-    }
+        string MessageBuilder(int value, string MessageType);
 
-    
-    [DataContract]
-    public class Server
-    {
-        
+        bool MessageCollect();
+
+        void MessageSendArduino(string message);
+
+        void MessageSendPLC(string message);
+
+        void Error();
     }
 }

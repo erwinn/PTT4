@@ -11,7 +11,7 @@ namespace TrainService
     public interface ITrainService
     {
         [OperationContract]
-        string MessageBuilder(int value, string MessageType);
+        string MessageBuilder(int id, int value, string MessageType);
 
         [OperationContract]
         bool MessageCollect();

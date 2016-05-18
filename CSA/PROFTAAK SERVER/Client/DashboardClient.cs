@@ -12,6 +12,7 @@ namespace Client
     {
         public DashboardClient()
         {
+ 
         }
 
         public DashboardClient(string endpointConfigurationName, string remoteAddress)
@@ -46,7 +47,7 @@ namespace Client
 
         public void StopTrain(int trainId)
         {
-            throw new NotImplementedException();
+            
         }
 
         public bool WriteSensorState(bool state, int sensor)

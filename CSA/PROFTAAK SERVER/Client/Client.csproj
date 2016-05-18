@@ -57,11 +57,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\MyCalculator\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -83,14 +78,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\MyCalculator\calculatorservice.wsdl" />
-    <None Include="Service References\MyCalculator\calculatorservice.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MyCalculator\calculatorservice1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MyCalculator\CCalculator.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -107,24 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\MyCalculator\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\MyCalculator\calculatorservice.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\MyCalculator\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\MyCalculator\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\MyCalculator\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

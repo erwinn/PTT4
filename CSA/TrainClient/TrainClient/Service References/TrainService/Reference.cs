@@ -16,10 +16,10 @@ namespace TrainClient.TrainService {
     public interface ITrainService {
         
         [System.ServiceModel.OperationContractAttribute(Action="TrainService/ITrainService/MessageBuilder", ReplyAction="TrainService/ITrainService/MessageBuilderResponse")]
-        string MessageBuilder(int value, string MessageType);
+        string MessageBuilder(int id, int value, string MessageType);
         
         [System.ServiceModel.OperationContractAttribute(Action="TrainService/ITrainService/MessageBuilder", ReplyAction="TrainService/ITrainService/MessageBuilderResponse")]
-        System.Threading.Tasks.Task<string> MessageBuilderAsync(int value, string MessageType);
+        System.Threading.Tasks.Task<string> MessageBuilderAsync(int id, int value, string MessageType);
         
         [System.ServiceModel.OperationContractAttribute(Action="TrainService/ITrainService/MessageCollect", ReplyAction="TrainService/ITrainService/MessageCollectResponse")]
         bool MessageCollect();
@@ -73,12 +73,12 @@ namespace TrainClient.TrainService {
                 base(binding, remoteAddress) {
         }
         
-        public string MessageBuilder(int value, string MessageType) {
-            return base.Channel.MessageBuilder(value, MessageType);
+        public string MessageBuilder(int id, int value, string MessageType) {
+            return base.Channel.MessageBuilder(id, value, MessageType);
         }
         
-        public System.Threading.Tasks.Task<string> MessageBuilderAsync(int value, string MessageType) {
-            return base.Channel.MessageBuilderAsync(value, MessageType);
+        public System.Threading.Tasks.Task<string> MessageBuilderAsync(int id, int value, string MessageType) {
+            return base.Channel.MessageBuilderAsync(id, value, MessageType);
         }
         
         public bool MessageCollect() {

@@ -6,7 +6,7 @@
 
  
 
-int delaynr=10;
+int delaynr=5;
 String s = "";
 int datatransmitter1=0;
 int datatransmitter2=0;
@@ -56,9 +56,9 @@ void readincoming()
     //////////////
     if(s=="datarequest")
     {
-      String message ="datatransmitter2 "+String(datatransmitter2);
+      String message ="datatransmitterA "+String(datatransmitter1);
       Serial.println(message); 
-      message ="datatransmitter1 "+String(datatransmitter1);
+      message ="datatransmitterB "+String(datatransmitter2);
       Serial.println(message);
     }   
     if(s=="turnon")

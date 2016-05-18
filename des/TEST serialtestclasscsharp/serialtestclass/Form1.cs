@@ -6,34 +6,78 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.Threading;
 
 namespace serialtestclass{
-    
+  
     public partial class Form1 : Form{
+        int[] value = new int[2];
+        bool blocktimer = false;
         SerialPort _serialPort=new SerialPort();
         public Form1(){
+            extractnumbers("a");
             InitializeComponent();
             for (int i = 0; i < 10;i++ ){
                 comboBox1.Items.Add("COM"+i);
             }
         }
 
+        private void extractnumbers(string test)
+        {
+
+            test = "aaaaa222\n";
+            int pos = -1;
+            int startpos = 0;
+            int timeslooped=0;
+            while ((pos = test.IndexOf('\n', pos + 1)) != -1)
+            {
+                if (pos < test.Length)
+                {
+                    string text = test.Substring(startpos, pos - startpos);
+                    value[timeslooped] = Convert.ToInt32(Regex.Match(text, @"\d+").Value);
+                    startpos = pos;
+                    Console.WriteLine(value[timeslooped]);
+
+                    timeslooped++;
+                }
+                
+            }
+          
+
+        }
+
+        private void readarduino()
+        {
+            if (_serialPort != null)
+            {
+                if (_serialPort.IsOpen)
+                {
+                    if (_serialPort.BytesToRead > 0)
+                    {
+                        string text = _serialPort.ReadExisting();
+                        Console.WriteLine(text);
+                        label1.Text = text;
+                    }
+                }
+            }
+        }
+        
         private void connect_Click(object sender, EventArgs e)
         {
             _serialPort.PortName = comboBox1.Text;
             _serialPort.BaudRate = 9600;
             //_serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
             _serialPort.Open();
-            if (_serialPort.IsOpen){
-                label1.Text = "open";
+            if (_serialPort.IsOpen){                label1.Text = "open";
                 timer1.Enabled = true;
                 timer2.Enabled = true;
          
             }
-            else {
+            else 
+            {
                 label1.Text = "failed";
             }
         }
@@ -51,40 +95,25 @@ namespace serialtestclass{
                
             }
         }
-        private void readarduino()
-        {
-            if (_serialPort != null)
-            {
-                if (_serialPort.IsOpen)
-                {
-                    if (_serialPort.BytesToRead > 0)
-                    {
-                        string text = _serialPort.ReadExisting();
-                        Console.WriteLine(text);
-                        label1.Text = text;
-                    }
-                }
-            }
-        }
-        
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (blocktimer)
+            { 
             readarduino();
+            sendCmd("datarequest");
+            }
 
         }
         private void label1_Click(object sender, EventArgs e){}
         private void Form1_Load(object sender, EventArgs e){}
 
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            sendCmd("datarequest");
-           
-        }
-
+       
         private void button1_Click(object sender, EventArgs e)
         {
+            blocktimer = true;
             sendCmd("turnon");
+            blocktimer = false;
         }
         /*/
         private void DataReceivedHandler(

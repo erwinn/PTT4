@@ -13,7 +13,8 @@ MCP2515 can;
 
 void setup()
 {
-  Serial.begin(9600); 
+  
+  Serial.begin(9600);  
   while(!Serial);
   Serial.println("Go...");
   SPI.setClockDivider(SPI_CLOCK_DIV8);
@@ -27,6 +28,7 @@ void setup()
     Serial.println("setCANNormalMode() failed");
     while(1);
   }
+   
 }
 
 
@@ -38,10 +40,21 @@ void loop()
   if(i&&msg.adrsValue==TREIN)
   { 
      
-     
-  }
- 
- 
- 
+      //TODO
+  } 
+  Serial.println(extractintfromstring("bbbb32"));
   delay(delaynr);
 }
+int extractintfromstring(String msg)
+{
+  String tempstring="";
+  for(int i=0;i<msg.length();i++)
+  {
+    if(isdigit(msg[i])!=0)
+    {
+      tempstring+=msg[i];
+    }
+  } 
+  return tempstring.toInt();
+}
+

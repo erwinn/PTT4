@@ -106,3 +106,15 @@ void loop()
   readCsharp();
   delay(delaynr);
 }
+int extractintfromstring(String msg)
+{
+  String tempstring="";
+  for(int i=0;i<msg.length();i++)
+  {
+    if(isdigit(msg[i])!=0)
+    {
+      tempstring+=msg[i];
+    }
+  } 
+  return tempstring.toInt();
+}

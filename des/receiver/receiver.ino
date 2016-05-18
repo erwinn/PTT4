@@ -6,7 +6,7 @@
 
  
 
-int delaynr=500;
+int delaynr=10;
 String s = "";
 int datatransmitter1=0;
 int datatransmitter2=0;
@@ -73,15 +73,15 @@ void loop()
     /*
     Serial.print(msg.data[0]);
      Serial.print(" ");
-    Serial.println("data receivedd");*/
+    Serial.println(msg.adrsValue);*/
     datatransmitter1=msg.data[0];
   }
   else if(i&&msg.adrsValue==0x7d2)
   {
-    /*
+/*
     Serial.print(msg.data[0]);
      Serial.print(" ");
-    Serial.println("data receivedd");*/
+    Serial.println(msg.adrsValue);*/
     datatransmitter2=msg.data[0];
   }
  

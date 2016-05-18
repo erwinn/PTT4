@@ -32,7 +32,7 @@ namespace Service
             return true;
         }
 
-        public void MessageSendArduino(string message)
+        public static void MessageSendArduino(string message)
         {
 
         }

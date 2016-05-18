@@ -38,9 +38,10 @@ namespace TrainClient
            string message = proxy.MessageBuilder(trainId, 0, "Arduino"); //0 tijdelijk value voor stop
         }
 
-        public bool WriteSensorState(bool state, int sensor)
+        public bool WriteSensorState(int state, int sensor)
         {
-            return false;
+            string message = proxy.MessageBuilder(sensor, state, "arduino"); //tijdelijk sensor als id gepakt
+                return true;
         }
     }
 }

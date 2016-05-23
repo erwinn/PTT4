@@ -22,10 +22,10 @@ namespace TrainClient
 
         }
 
-        public void Run(bool state)
-        {
+       // public void Run(bool state)
+        //{
 
-        }
+        //}
 
         public bool SwitchTrack(int id, int state)
         {
@@ -35,13 +35,13 @@ namespace TrainClient
 
         public void StopTrain(int trainId)
         {
-           string message = proxy.MessageBuilder(trainId, 0, "Arduino"); //0 tijdelijk value voor stop
+           string message = proxy.MessageBuilder(trainId, 0, "Arduino"); 
         }
 
-        public bool WriteSensorState(int state, int sensor)
-        {
-            string message = proxy.MessageBuilder(sensor, state, "arduino"); //tijdelijk sensor als id gepakt
-                return true;
-        }
+       // public bool WriteSensorState(int state, int sensor)
+       // {
+           // string message = proxy.MessageBuilder(sensor, state, "arduino"); 
+              //  return true;
+       // }
     }
 }

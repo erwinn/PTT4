@@ -35,6 +35,10 @@ namespace TrainService
             
             throw new NotImplementedException();
         }
+        public void ArduinoConnect(string Portname,int Baudrate)
+        {
+            serialClass.Connect(Portname, Baudrate);
+        }
 
         public void MessageSendPLC(string message)
         {

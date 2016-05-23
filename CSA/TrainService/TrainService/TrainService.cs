@@ -7,9 +7,12 @@ using System.Text;
 
 namespace TrainService
 {
-
+    
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class TrainService : ITrainService
     {
+        SerialClass serialClass = new SerialClass();
+     
         public void Error()
         {
             throw new NotImplementedException();
@@ -17,6 +20,7 @@ namespace TrainService
 
         public string MessageBuilder(int id, int value, string MessageType)
         {
+
             throw new NotImplementedException();
         }
 
@@ -27,6 +31,8 @@ namespace TrainService
 
         public void MessageSendArduino(string message)
         {
+            serialClass.sendCmd(message);
+            
             throw new NotImplementedException();
         }
 

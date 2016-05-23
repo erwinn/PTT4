@@ -80,7 +80,15 @@ void turnon()
   digitalWrite(8,LOW);
   digitalWrite(7,LOW);
 }
-
+bool Contains( String s, String search)
+{
+int max = s.length() - search.length(); // the searchstring has to fit in the other one  
+for (int i=0; i<= max; i++) 
+{
+if (s.substring(i) == search) return true;  // or i
+}
+return false;  //or -1
+}
 
 void loop()
 {

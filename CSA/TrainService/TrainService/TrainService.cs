@@ -13,6 +13,10 @@ namespace TrainService
     {
         SerialClass serialClass = new SerialClass();
      
+        public TrainService()
+        {
+            serialClass.Connect();
+        }
         public void Error()
         {
             throw new NotImplementedException();
@@ -20,7 +24,7 @@ namespace TrainService
 
         public string MessageBuilder(int id, int value, string MessageType)
         {
-
+            MessageSendArduino(MessageType + IntToLetters(id) + value);
             throw new NotImplementedException();
         }
 
@@ -31,18 +35,27 @@ namespace TrainService
 
         public void MessageSendArduino(string message)
         {
-            serialClass.sendCmd(message);
+
+            if (serialClass.sendCmd(message)) 
+            {
+                serialClass.Connect();
+            }
             
             throw new NotImplementedException();
         }
-        public void ArduinoConnect(string Portname,int Baudrate)
-        {
-            serialClass.Connect(Portname, Baudrate);
-        }
-
         public void MessageSendPLC(string message)
         {
             throw new NotImplementedException();
+        }
+        private string IntToLetters(int value)
+        {
+            string result = string.Empty;
+            while (--value >= 0)
+            {
+                result = (char)('A' + value % 26) + result;
+                value /= 26;
+            }
+            return result;
         }
     }
 }

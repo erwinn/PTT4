@@ -15,13 +15,14 @@ namespace TrainService
         int[] sensorvalue = new int[2];
         bool blocktimer = false;
         SerialPort _serialPort = new SerialPort();
-
+        //string[] ports = SerialPort.GetPortNames();
         public SerialPort SerialPort
         {
             get { return _serialPort; }
            
         }
-
+        
+       
         public int getSensor_1()
         {
             return sensorvalue[1];
@@ -31,7 +32,7 @@ namespace TrainService
             return sensorvalue[2];
         }
 
-        public void sendCmd(String cmd)
+        public bool sendCmd(String cmd)
         {
             try
             {
@@ -41,18 +42,27 @@ namespace TrainService
                     blocktimer = false;
                     _serialPort.Write(cmd);
                     blocktimer = true;
+                    return true;
                 }
             }
             catch (NullReferenceException)
             {
                 throw new NullReferenceException();
+                
 
             }
+            return false;
         }
-        public void Connect(string Portname,int Baudrate)
+        public void Connect()
         {
-            _serialPort.PortName = Portname;
-            _serialPort.BaudRate = Baudrate;
+            string[] ports = SerialPort.GetPortNames();
+            if (ports == null || ports.Length==0)
+            {
+                return;
+            }
+            _serialPort.PortName = ports[0];
+
+            _serialPort.BaudRate = 9600;
             //_serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
             _serialPort.Open();
             if (_serialPort.IsOpen)

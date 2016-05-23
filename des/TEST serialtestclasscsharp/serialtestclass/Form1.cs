@@ -111,9 +111,9 @@ namespace serialtestclass{
        
         private void button1_Click(object sender, EventArgs e)
         {
-            blocktimer = true;
-            sendCmd("turnon");
-            blocktimer = false;
+                blocktimer = true;
+                sendCmd("turnon");
+                blocktimer = false;
         }
         /*/
         private void DataReceivedHandler(

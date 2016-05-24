@@ -34,10 +34,10 @@ void loop()
 {
   //receiver
   int i = can.receiveCANMessage(&msg, 1000);
-  if(i&&msg.adrsValue==TREIN)
+  if(i&&msg.adrsValue==SPOORWISSEL)
   { 
      int treinid=msg.data[1];
-     int state=msg.data[0]
+     int state=msg.data[0];
      Serial.print("trein id =");
      Serial.print(treinid);
      Serial.print(" state ");

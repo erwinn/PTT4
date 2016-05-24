@@ -22,7 +22,7 @@ namespace TrainClient
 
         private void btnSwitchTrack_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(tbTrain);
+            int id = Convert.ToInt32(tbTrain.Text);
             int state = Convert.ToInt32(tbState);
             client.SwitchTrack(id, state);
         }

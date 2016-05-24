@@ -46,7 +46,7 @@ void loop()
      
       //TODO
   } 
-  Serial.println(extractintfromstring("bbbb32"));
+ 
   delay(delaynr);
 }
 int extractintfromstring(String msg)

@@ -18,6 +18,10 @@ CANMSG sendmsg;
 
 void setup()
 {
+
+
+
+  
 pinMode(8, OUTPUT);
 pinMode(7, OUTPUT);
   Serial.begin(9600); 
@@ -38,6 +42,9 @@ pinMode(7, OUTPUT);
   sendmsg.isExtendedAdrs = false;
   sendmsg.rtr = false;
   sendmsg.dataLength=8;
+
+  
+ 
 }
 
 void readCsharp()
@@ -61,31 +68,34 @@ void readCsharp()
     {
       turnon();
     }
-    if(Contains(s, "ArduinoSwitchTrackA"))
+    if(Startwith(s, "ArduinoSwitchTrackA"))
     {
       sendmsg.data[0]=extractintfromstring(s);
       sendmsg.data[1]=1;
       sendcanmsg(SPOORWISSEL);
     }
-    if(Contains(s, "ArduinoSwitchTrackB"))
+    if(Startwith(s, "ArduinoSwitchTrackB"))
     {
       sendmsg.data[0]=extractintfromstring(s);
       sendmsg.data[1]=2;
       sendcanmsg(SPOORWISSEL);
     }
-    if(Contains(s, "ArduinoStopTrainA"))
+    if(Startwith(s, "ArduinoStopTrainA"))
+    {
+      sendmsg.data[0]=0;
+      sendmsg.data[1]=1;
+      sendcanmsg(TREIN);
+      Serial.println(s);
+    }
+    if(Startwith(s, "ArduinoStopTrainB"))
     {
       sendmsg.data[0]=0;
       sendmsg.data[1]=1;
       sendcanmsg(TREIN);
     }
-    if(Contains(s, "ArduinoStopTrainB"))
-    {
-      sendmsg.data[0]=0;
-      sendmsg.data[1]=1;
-      sendcanmsg(TREIN);
-    }
-    //////////////////
+    /////////////////////////////////////////
+    
+    ///////////////////////////////////
     s="";
   }
 }
@@ -104,12 +114,13 @@ void turnon()
   digitalWrite(8,LOW);
   digitalWrite(7,LOW);
 }
-bool Contains( String s, String search)
+bool Startwith(String s, String search)
 {
-int max = s.length() - search.length(); // the searchstring has to fit in the other one  
+int max =search.length(); // the searchstring has to fit in the other one  
 for (int i=0; i<= max; i++) 
 {
-if (s.substring(i) == search) return true;  // or i
+  
+if (s.substring(0,i) == search) return true;  // or i
 }
 return false;  //or -1
 }

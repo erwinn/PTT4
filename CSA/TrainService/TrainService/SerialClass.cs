@@ -16,6 +16,14 @@ namespace TrainService
         bool blocktimer = false;
         SerialPort _serialPort = new SerialPort();
         //string[] ports = SerialPort.GetPortNames();
+
+        public SerialClass()
+        {
+            Debug.WriteLine("constructor SerialClass() ");
+            timer1.Elapsed += timer1_Tick;
+            timer1.Enabled = true;
+         
+        }
         public SerialPort SerialPort
         {
             get { return _serialPort; }
@@ -34,16 +42,21 @@ namespace TrainService
 
         public bool sendCmd(String cmd)
         {
+            Debug.WriteLine("send");
             try
             {
-                if (_serialPort.IsOpen)
+                if (_serialPort!=null)
                 {
+                    if (_serialPort.IsOpen)
+                    {
                    
-                    blocktimer = false;
-                    _serialPort.Write(cmd);
-                    blocktimer = true;
-                    return true;
+                        blocktimer = true;
+                        _serialPort.Write(cmd);
+                        blocktimer = false;
+                        return true;
+                    }
                 }
+
             }
             catch (NullReferenceException)
             {
@@ -52,6 +65,11 @@ namespace TrainService
 
             }
             return false;
+        }
+        private void DataReceivedHandler(object sender,
+                        SerialDataReceivedEventArgs e )
+        {
+            readarduino();
         }
         public void Connect()
         {
@@ -63,13 +81,13 @@ namespace TrainService
             _serialPort.PortName = ports[0];
 
             _serialPort.BaudRate = 9600;
-            //_serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+            _serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
             _serialPort.Open();
             if (_serialPort.IsOpen)
             {
                 Debug.WriteLine("open");
                 sendCmd("datarequest");
-                timer1.Elapsed += timer1_Tick;
+                
                 timer1.Enabled = true;
 
             }
@@ -80,9 +98,11 @@ namespace TrainService
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (blocktimer)
+            Debug.WriteLine("ticck");
+            if (!blocktimer)
             {
-                readarduino();
+                Debug.WriteLine("aaaa");
+                //readarduino();
                 sendCmd("datarequest");
             }
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-
+using System.Diagnostics;
 namespace TrainService
 {
     
@@ -15,6 +15,7 @@ namespace TrainService
      
         public TrainService()
         {
+            Debug.WriteLine("constructor TrainService() ");
             serialClass.Connect();
         }
         public void Error()
@@ -25,7 +26,8 @@ namespace TrainService
         public string MessageBuilder(int id, int value, string MessageType)
         {
             MessageSendArduino(MessageType + IntToLetters(id) + value);
-            throw new NotImplementedException();
+            return MessageType + IntToLetters(id) + value;
+            //throw new NotImplementedException();
         }
 
         public bool MessageCollect()
@@ -35,13 +37,19 @@ namespace TrainService
 
         public void MessageSendArduino(string message)
         {
-
-            if (serialClass.sendCmd(message)) 
+            if ( serialClass.SerialPort==null)
             {
                 serialClass.Connect();
             }
+            else if (!serialClass.SerialPort.IsOpen)
+            {
+                serialClass.Connect();
+            }
+
+            serialClass.sendCmd(message);
             
-            throw new NotImplementedException();
+            
+          //  throw new NotImplementedException();
         }
         public void MessageSendPLC(string message)
         {

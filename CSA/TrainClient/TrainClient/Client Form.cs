@@ -29,7 +29,7 @@ namespace TrainClient
 
         private void btnStopTrain_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(tbTrainID2);
+            int id = Convert.ToInt32(tbTrainID2.Text);
             client.StopTrain(id);
         }
 

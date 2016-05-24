@@ -5,15 +5,16 @@
 #define TREIN 0x7d3
 #define SPOORWEGOVERGANG 0x7d4
 #define SPOORWISSEL 0x7d5
+ 
 //
 int delaynr=5;
 String s = "";
 int datatransmitter1=0;
 int datatransmitter2=0;
 
-CANMSG msg;
+CANMSG readmsg;
 MCP2515 can;
-
+CANMSG sendmsg;
 
 void setup()
 {
@@ -33,6 +34,10 @@ pinMode(7, OUTPUT);
     Serial.println("setCANNormalMode() failed");
     while(1);
   }
+  
+  sendmsg.isExtendedAdrs = false;
+  sendmsg.rtr = false;
+  sendmsg.dataLength=8;
 }
 
 void readCsharp()
@@ -56,19 +61,38 @@ void readCsharp()
     {
       turnon();
     }
+    if(Contains(s, "ArduinoSwitchTrackA"))
+    {
+      sendmsg.data[0]=extractintfromstring(s);
+      sendmsg.data[1]=1;
+      sendcanmsg(SPOORWISSEL);
+    }
+    if(Contains(s, "ArduinoSwitchTrackB"))
+    {
+      sendmsg.data[0]=extractintfromstring(s);
+      sendmsg.data[1]=2;
+      sendcanmsg(SPOORWISSEL);
+    }
+    if(Contains(s, "ArduinoStopTrainA"))
+    {
+      sendmsg.data[0]=0;
+      sendmsg.data[1]=1;
+      sendcanmsg(TREIN);
+    }
+    if(Contains(s, "ArduinoStopTrainB"))
+    {
+      sendmsg.data[0]=0;
+      sendmsg.data[1]=1;
+      sendcanmsg(TREIN);
+    }
     //////////////////
     s="";
   }
 }
-void sendcanmsg(int adress,int value)
+void sendcanmsg(int adress)
 {
-  CANMSG msg2;
-  msg2.adrsValue = adress;
-  msg2.isExtendedAdrs = false;
-  msg2.rtr = false;
-  msg2.dataLength = 1;
-  msg2.data[0] = value;
-  can.transmitCANMessage(msg2, 1000);
+  sendmsg.adrsValue = adress;
+  can.transmitCANMessage(sendmsg, 1000);
 }
 
 void turnon()
@@ -94,22 +118,22 @@ void loop()
 {
  
   //receiver
-  int i = can.receiveCANMessage(&msg, 1000);
-  if(i&&msg.adrsValue==SENSOR_1)
+  int i = can.receiveCANMessage(&readmsg, 1000);
+  if(i&&readmsg.adrsValue==SENSOR_1)
   { 
     /*
     Serial.print(msg.data[0]);
      Serial.print(" ");
     Serial.println(msg.adrsValue);*/
-    datatransmitter1=msg.data[0];
+    datatransmitter1=readmsg.data[0];
   }
-  else if(i&&msg.adrsValue==SENSOR_2)
+  else if(i&&readmsg.adrsValue==SENSOR_2)
   {
 /*
     Serial.print(msg.data[0]);
      Serial.print(" ");
     Serial.println(msg.adrsValue);*/
-    datatransmitter2=msg.data[0];
+    datatransmitter2=readmsg.data[0];
   }
   readCsharp();
   delay(delaynr);

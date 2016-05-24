@@ -54,7 +54,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 3;
-            this.comboBox1.Text = "COM6";
+            this.comboBox1.Text = "COM10";
             // 
             // label1
             // 
@@ -70,8 +70,6 @@
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // 
             // 
             // button1
             // 

@@ -39,6 +39,10 @@ void loop()
   int i = can.receiveCANMessage(&msg, 1000);
   if(i&&msg.adrsValue==TREIN)
   { 
+     int treinid=msg.data[1];
+     Serial.print("trein id =");
+     Serial.print(treinid);
+     Serial.print(" stop");
      
       //TODO
   } 

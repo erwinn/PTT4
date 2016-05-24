@@ -29,13 +29,13 @@ namespace TrainClient
 
         public bool SwitchTrack(int id, int state)
         {
-           string message = proxy.MessageBuilder(id, state, "Arduino");
+            string message = proxy.MessageBuilder(id, state, "ArduinoSwitchTrack");
             return true;
         }
 
         public void StopTrain(int trainId)
         {
-           string message = proxy.MessageBuilder(trainId, 0, "Arduino"); 
+            string message = proxy.MessageBuilder(trainId, 0, "ArduinoStopTrain"); 
         }
 
        // public bool WriteSensorState(int state, int sensor)

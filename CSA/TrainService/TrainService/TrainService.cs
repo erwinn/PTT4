@@ -37,18 +37,8 @@ namespace TrainService
 
         public void MessageSendArduino(string message)
         {
-            if ( serialClass.SerialPort==null)
-            {
-                serialClass.Connect();
-            }
-            else if (!serialClass.SerialPort.IsOpen)
-            {
-                serialClass.Connect();
-            }
-
             serialClass.sendCmd(message);
-            
-            
+          
           //  throw new NotImplementedException();
         }
         public void MessageSendPLC(string message)

@@ -33,6 +33,11 @@ namespace TrainClient
             client.StopTrain(id);
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
        // private void btnWriteSensor_Click(object sender, EventArgs e)
        // {
            // int state = Convert.ToInt32(tbState2);

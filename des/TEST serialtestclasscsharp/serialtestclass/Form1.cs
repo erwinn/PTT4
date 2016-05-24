@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.Threading;
+using System.Diagnostics;
 
 namespace serialtestclass{
   
@@ -23,6 +24,8 @@ namespace serialtestclass{
             for (int i = 0; i < 10;i++ ){
                 comboBox1.Items.Add("COM"+i);
             }
+            _serialPort.BaudRate = 9600;
+            _serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
         }
 
         private void extractnumbers(string test)
@@ -67,9 +70,9 @@ namespace serialtestclass{
         
         private void connect_Click(object sender, EventArgs e)
         {
+            _serialPort.Close();
             _serialPort.PortName = comboBox1.Text;
-            _serialPort.BaudRate = 9600;
-            //_serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+            //
             _serialPort.Open();
             if (_serialPort.IsOpen){                label1.Text = "open";
                 timer1.Enabled = true;
@@ -82,26 +85,36 @@ namespace serialtestclass{
             }
         }
         
-        public void sendCmd(String cmd)
+        public bool sendCmd(String cmd)
         {
-            try{
-                if (_serialPort.IsOpen){
-                    //hier t command
-                    _serialPort.Write(cmd);
-                }         
-            }
-            catch (NullReferenceException){
-                throw new NullReferenceException();
-               
-            }
+            bool success = true;
+                 try
+                 {
+                     if (_serialPort.IsOpen)
+                     {
+                         //hier t command
+                         _serialPort.Write(cmd);
+
+                     }
+                     else
+                     {
+                         Debug.WriteLine("a");
+                     }
+                 }
+                 catch (Exception ex)
+                 {
+                    
+                     success = false;
+                 }
+                 return success;
+     
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (blocktimer)
-            { 
-            readarduino();
-            sendCmd("datarequest");
+            {       
+           // sendCmd("datarequest");
             }
 
         }
@@ -115,7 +128,7 @@ namespace serialtestclass{
                 sendCmd("turnon");
                 blocktimer = false;
         }
-        /*/
+  
         private void DataReceivedHandler(
                         object sender,
                         SerialDataReceivedEventArgs e)
@@ -124,6 +137,6 @@ namespace serialtestclass{
 
             Console.Write(indata);  
         }
-       /*/
+     
     }
 }

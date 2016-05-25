@@ -22,7 +22,18 @@ namespace TrainService
         {
             throw new NotImplementedException();
         }
-
+        public int getLrdValue(int ldrId)
+        {
+            if(ldrId==1)
+            {
+                return serialClass.getSensorArray()[0];
+            }
+            else if (ldrId == 2)
+            {
+                return serialClass.getSensorArray()[1];
+            }
+            return 0;
+        }
         public string MessageBuilder(int id, int value, string MessageType)
         {
             MessageSendArduino(MessageType + IntToLetters(id) + value);

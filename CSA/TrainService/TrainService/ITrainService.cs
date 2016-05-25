@@ -17,6 +17,9 @@ namespace TrainService
         bool MessageCollect();
 
         [OperationContract]
+        int getLrdValue(int ldrId);
+
+        [OperationContract]
         void MessageSendArduino(string message);
 
         [OperationContract]

@@ -199,6 +199,11 @@
             this.numSpeed.Name = "numSpeed";
             this.numSpeed.Size = new System.Drawing.Size(120, 20);
             this.numSpeed.TabIndex = 9;
+            this.numSpeed.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             // 
             // tbActuatorId
             // 
@@ -206,7 +211,7 @@
             this.tbActuatorId.Name = "tbActuatorId";
             this.tbActuatorId.Size = new System.Drawing.Size(100, 20);
             this.tbActuatorId.TabIndex = 8;
-            this.tbActuatorId.Text = "2";
+            this.tbActuatorId.Text = "1";
             // 
             // lblSensor
             // 
@@ -251,6 +256,7 @@
             // 
             // tbSensorValue
             // 
+            this.tbSensorValue.Enabled = false;
             this.tbSensorValue.Location = new System.Drawing.Point(9, 112);
             this.tbSensorValue.Name = "tbSensorValue";
             this.tbSensorValue.Size = new System.Drawing.Size(100, 20);
@@ -262,6 +268,7 @@
             this.tbSensorId.Name = "tbSensorId";
             this.tbSensorId.Size = new System.Drawing.Size(100, 20);
             this.tbSensorId.TabIndex = 8;
+            this.tbSensorId.Text = "2";
             // 
             // label1
             // 

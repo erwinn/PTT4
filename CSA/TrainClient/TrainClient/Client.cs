@@ -38,16 +38,14 @@ namespace TrainClient
             string message = proxy.MessageBuilder(trainId, 0, "ArduinoStopTrain");
         }
 
-        public bool WriteActuatorValue(int actuator, int value)
+        public string WriteActuatorValue(int actuator, int value)
         {
-            string message = proxy.MessageBuilder(actuator, value, "ArduinoSetSpeed");
-            return true; //0 t/m 22
+            return proxy.MessageBuilder(actuator, value, "ArduinoSetSpeed");
         }
 
         public int ReadSensorState(int SensorId)
         {
-            int value = proxy.GetSensorValue(SensorId);
-            return value;
+            return proxy.GetSensorValue(SensorId);
         }
 
     }

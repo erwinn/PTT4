@@ -42,13 +42,13 @@ namespace TrainClient
 
         private void btnReadSensor_Click(object sender, EventArgs e)
         {
-            int readSensor = client.ReadSensorState(Convert.ToInt32(tbSensorId.Text));
-            tbSensorValue.Text = readSensor.ToString();
+            tbSensorValue.Text = client.ReadSensorState(Convert.ToInt32(tbSensorId.Text)).ToString();
         }
 
         private void btnWriteActuator_Click_1(object sender, EventArgs e)
         {
-            bool writeActuator = client.WriteActuatorValue(Convert.ToInt32(tbActuatorId.Text), Convert.ToInt32(numSpeed.Text) * 10);
+            string message = client.WriteActuatorValue(Convert.ToInt32(tbActuatorId.Text), Convert.ToInt32(numSpeed.Text) * 10);
+            MessageBox.Show(message);
         }
     }
 }

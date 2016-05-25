@@ -19,7 +19,7 @@ namespace TrainClient
 
         public void Refresh()
         {
-            
+           
         }
 
        public void Run(int trainId)

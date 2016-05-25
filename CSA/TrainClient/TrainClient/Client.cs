@@ -22,10 +22,10 @@ namespace TrainClient
 
         }
 
-       // public void Run(bool state)
-        //{
+       public void Run(int trainId)
+        {
 
-        //}
+        }
 
         public bool SwitchTrack(int id, int state)
         {

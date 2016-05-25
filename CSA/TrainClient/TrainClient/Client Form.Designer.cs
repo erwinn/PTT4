@@ -44,6 +44,7 @@
             this.tbState2 = new System.Windows.Forms.TextBox();
             this.lblSensor = new System.Windows.Forms.Label();
             this.lblState2 = new System.Windows.Forms.Label();
+            this.btnStartTrain = new System.Windows.Forms.Button();
             this.gbSwitchTrack.SuspendLayout();
             this.gbStopTrain.SuspendLayout();
             this.gbWriteSensorState.SuspendLayout();
@@ -61,7 +62,7 @@
             // 
             // btnStopTrain
             // 
-            this.btnStopTrain.Location = new System.Drawing.Point(6, 128);
+            this.btnStopTrain.Location = new System.Drawing.Point(6, 171);
             this.btnStopTrain.Name = "btnStopTrain";
             this.btnStopTrain.Size = new System.Drawing.Size(120, 47);
             this.btnStopTrain.TabIndex = 3;
@@ -126,12 +127,13 @@
             // 
             // gbStopTrain
             // 
+            this.gbStopTrain.Controls.Add(this.btnStartTrain);
             this.gbStopTrain.Controls.Add(this.lblTrainID2);
             this.gbStopTrain.Controls.Add(this.tbTrainID2);
             this.gbStopTrain.Controls.Add(this.btnStopTrain);
             this.gbStopTrain.Location = new System.Drawing.Point(274, 36);
             this.gbStopTrain.Name = "gbStopTrain";
-            this.gbStopTrain.Size = new System.Drawing.Size(200, 186);
+            this.gbStopTrain.Size = new System.Drawing.Size(249, 236);
             this.gbStopTrain.TabIndex = 6;
             this.gbStopTrain.TabStop = false;
             this.gbStopTrain.Text = "Stop Train";
@@ -139,7 +141,7 @@
             // lblTrainID2
             // 
             this.lblTrainID2.AutoSize = true;
-            this.lblTrainID2.Location = new System.Drawing.Point(16, 52);
+            this.lblTrainID2.Location = new System.Drawing.Point(93, 89);
             this.lblTrainID2.Name = "lblTrainID2";
             this.lblTrainID2.Size = new System.Drawing.Size(45, 13);
             this.lblTrainID2.TabIndex = 5;
@@ -147,7 +149,7 @@
             // 
             // tbTrainID2
             // 
-            this.tbTrainID2.Location = new System.Drawing.Point(16, 89);
+            this.tbTrainID2.Location = new System.Drawing.Point(70, 128);
             this.tbTrainID2.Name = "tbTrainID2";
             this.tbTrainID2.Size = new System.Drawing.Size(100, 20);
             this.tbTrainID2.TabIndex = 4;
@@ -199,6 +201,16 @@
             this.lblState2.TabIndex = 5;
             this.lblState2.Text = "State";
             // 
+            // btnStartTrain
+            // 
+            this.btnStartTrain.Location = new System.Drawing.Point(132, 171);
+            this.btnStartTrain.Name = "btnStartTrain";
+            this.btnStartTrain.Size = new System.Drawing.Size(111, 47);
+            this.btnStartTrain.TabIndex = 6;
+            this.btnStartTrain.Text = "Start Train";
+            this.btnStartTrain.UseVisualStyleBackColor = true;
+            this.btnStartTrain.Click += new System.EventHandler(this.btnStartTrain_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -238,6 +250,7 @@
         private System.Windows.Forms.TextBox tbState2;
         private System.Windows.Forms.Label lblSensor;
         private System.Windows.Forms.Label lblState2;
+        private System.Windows.Forms.Button btnStartTrain;
     }
 }
 

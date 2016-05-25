@@ -38,11 +38,17 @@ namespace TrainClient
 
         }
 
-       // private void btnWriteSensor_Click(object sender, EventArgs e)
-       // {
-           // int state = Convert.ToInt32(tbState2);
-           // int sensor = Convert.ToInt32(tbSensor);
-          //  bool writesensor = client.WriteSensorState(state, sensor);
-       // }
+        private void btnStartTrain_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(tbTrainID2.Text);
+            client.Run(id);
+        }
+
+        // private void btnWriteSensor_Click(object sender, EventArgs e)
+        // {
+        // int state = Convert.ToInt32(tbState2);
+        // int sensor = Convert.ToInt32(tbSensor);
+        //  bool writesensor = client.WriteSensorState(state, sensor);
+        // }
     }
 }

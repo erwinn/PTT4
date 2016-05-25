@@ -30,4 +30,3 @@ void RefreshRPM()
     RPM = 0;
   }
 }
-

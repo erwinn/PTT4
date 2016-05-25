@@ -26,7 +26,7 @@ namespace TrainService
         {
             if (serialClass.getSensorArray().Length >= ldrId)
             {
-                return serialClass.getSensorArray()[ldrId + 1];
+                return serialClass.getSensorArray()[ldrId - 1];
             }
             else
             {

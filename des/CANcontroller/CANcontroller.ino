@@ -93,6 +93,21 @@ void readCsharp()
       sendmsg.data[1]=1;
       sendcanmsg(TREIN);
     }
+    if(Startwith(s, "ArduinoSetSpeedA"))
+    {
+      sendmsg.data[0]=extractintfromstring(s);
+   
+      sendmsg.data[1]=1;
+      sendcanmsg(TREIN);
+      Serial.println(s);
+    }
+    if(Startwith(s, "ArduinoSetSpeedB"))
+    {
+      sendmsg.data[0]=extractintfromstring(s);
+      sendmsg.data[1]=1;
+      sendcanmsg(TREIN);
+      Serial.println(s);
+    }
     /////////////////////////////////////////
     
     ///////////////////////////////////

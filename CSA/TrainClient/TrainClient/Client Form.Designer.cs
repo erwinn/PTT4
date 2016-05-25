@@ -41,13 +41,14 @@
             this.tbTrainID2 = new System.Windows.Forms.TextBox();
             this.gbWriteSensorState = new System.Windows.Forms.GroupBox();
             this.tbSensor = new System.Windows.Forms.TextBox();
-            this.tbState2 = new System.Windows.Forms.TextBox();
             this.lblSensor = new System.Windows.Forms.Label();
             this.lblState2 = new System.Windows.Forms.Label();
             this.btnStartTrain = new System.Windows.Forms.Button();
+            this.numSpeed = new System.Windows.Forms.NumericUpDown();
             this.gbSwitchTrack.SuspendLayout();
             this.gbStopTrain.SuspendLayout();
             this.gbWriteSensorState.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSpeed)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSwitchTrack
@@ -76,7 +77,7 @@
             this.btnWriteSensor.Name = "btnWriteSensor";
             this.btnWriteSensor.Size = new System.Drawing.Size(120, 47);
             this.btnWriteSensor.TabIndex = 4;
-            this.btnWriteSensor.Text = "Write Sensor State";
+            this.btnWriteSensor.Text = "Set Speed";
             this.btnWriteSensor.UseVisualStyleBackColor = true;
             // 
             // gbSwitchTrack
@@ -157,8 +158,8 @@
             // 
             // gbWriteSensorState
             // 
+            this.gbWriteSensorState.Controls.Add(this.numSpeed);
             this.gbWriteSensorState.Controls.Add(this.tbSensor);
-            this.gbWriteSensorState.Controls.Add(this.tbState2);
             this.gbWriteSensorState.Controls.Add(this.lblSensor);
             this.gbWriteSensorState.Controls.Add(this.lblState2);
             this.gbWriteSensorState.Controls.Add(this.btnWriteSensor);
@@ -171,35 +172,28 @@
             // 
             // tbSensor
             // 
-            this.tbSensor.Location = new System.Drawing.Point(13, 107);
+            this.tbSensor.Location = new System.Drawing.Point(8, 52);
             this.tbSensor.Name = "tbSensor";
             this.tbSensor.Size = new System.Drawing.Size(100, 20);
             this.tbSensor.TabIndex = 8;
             // 
-            // tbState2
-            // 
-            this.tbState2.Location = new System.Drawing.Point(10, 52);
-            this.tbState2.Name = "tbState2";
-            this.tbState2.Size = new System.Drawing.Size(100, 20);
-            this.tbState2.TabIndex = 7;
-            // 
             // lblSensor
             // 
             this.lblSensor.AutoSize = true;
-            this.lblSensor.Location = new System.Drawing.Point(10, 89);
+            this.lblSensor.Location = new System.Drawing.Point(6, 36);
             this.lblSensor.Name = "lblSensor";
-            this.lblSensor.Size = new System.Drawing.Size(40, 13);
+            this.lblSensor.Size = new System.Drawing.Size(57, 13);
             this.lblSensor.TabIndex = 6;
-            this.lblSensor.Text = "Sensor";
+            this.lblSensor.Text = "Sensor ID:";
             // 
             // lblState2
             // 
             this.lblState2.AutoSize = true;
-            this.lblState2.Location = new System.Drawing.Point(7, 35);
+            this.lblState2.Location = new System.Drawing.Point(2, 83);
             this.lblState2.Name = "lblState2";
-            this.lblState2.Size = new System.Drawing.Size(32, 13);
+            this.lblState2.Size = new System.Drawing.Size(38, 13);
             this.lblState2.TabIndex = 5;
-            this.lblState2.Text = "State";
+            this.lblState2.Text = "Speed";
             // 
             // btnStartTrain
             // 
@@ -210,6 +204,18 @@
             this.btnStartTrain.Text = "Start Train";
             this.btnStartTrain.UseVisualStyleBackColor = true;
             this.btnStartTrain.Click += new System.EventHandler(this.btnStartTrain_Click);
+            // 
+            // numSpeed
+            // 
+            this.numSpeed.Location = new System.Drawing.Point(8, 100);
+            this.numSpeed.Maximum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this.numSpeed.Name = "numSpeed";
+            this.numSpeed.Size = new System.Drawing.Size(120, 20);
+            this.numSpeed.TabIndex = 9;
             // 
             // Form1
             // 
@@ -228,6 +234,7 @@
             this.gbStopTrain.PerformLayout();
             this.gbWriteSensorState.ResumeLayout(false);
             this.gbWriteSensorState.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSpeed)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -247,10 +254,10 @@
         private System.Windows.Forms.Label lblTrainID2;
         private System.Windows.Forms.TextBox tbTrainID2;
         private System.Windows.Forms.TextBox tbSensor;
-        private System.Windows.Forms.TextBox tbState2;
         private System.Windows.Forms.Label lblSensor;
         private System.Windows.Forms.Label lblState2;
         private System.Windows.Forms.Button btnStartTrain;
+        private System.Windows.Forms.NumericUpDown numSpeed;
     }
 }
 

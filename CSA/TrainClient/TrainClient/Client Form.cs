@@ -50,5 +50,15 @@ namespace TrainClient
             string message = client.WriteActuatorValue(Convert.ToInt32(tbActuatorId.Text), Convert.ToInt32(numSpeed.Text) * 10);
             MessageBox.Show(message);
         }
+
+        private void LdrReadClock_Tick(object sender, EventArgs e)
+        {   
+            int valueLdr = client.ReadSensorState(1);
+            tbReadTimeLdr.Text = valueLdr.ToString();
+            if(valueLdr < 10)
+            {
+                MessageBox.Show("Danger!");
+            }
+        }
     }
 }

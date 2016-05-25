@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnSwitchTrack = new System.Windows.Forms.Button();
             this.btnStopTrain = new System.Windows.Forms.Button();
             this.btnWriteActuator = new System.Windows.Forms.Button();
@@ -51,6 +52,9 @@
             this.tbSensorId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnReadSensor = new System.Windows.Forms.Button();
+            this.LdrReadClock = new System.Windows.Forms.Timer(this.components);
+            this.tbReadTimeLdr = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.gbSwitchTrack.SuspendLayout();
             this.gbStopTrain.SuspendLayout();
             this.gbWriteSensorState.SuspendLayout();
@@ -233,6 +237,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.tbReadTimeLdr);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.tbSensorValue);
             this.groupBox1.Controls.Add(this.tbSensorId);
@@ -248,7 +254,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 93);
+            this.label2.Location = new System.Drawing.Point(6, 78);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 13);
             this.label2.TabIndex = 10;
@@ -257,7 +263,7 @@
             // tbSensorValue
             // 
             this.tbSensorValue.Enabled = false;
-            this.tbSensorValue.Location = new System.Drawing.Point(9, 112);
+            this.tbSensorValue.Location = new System.Drawing.Point(9, 94);
             this.tbSensorValue.Name = "tbSensorValue";
             this.tbSensorValue.Size = new System.Drawing.Size(100, 20);
             this.tbSensorValue.TabIndex = 9;
@@ -281,13 +287,34 @@
             // 
             // btnReadSensor
             // 
-            this.btnReadSensor.Location = new System.Drawing.Point(6, 189);
+            this.btnReadSensor.Location = new System.Drawing.Point(8, 120);
             this.btnReadSensor.Name = "btnReadSensor";
             this.btnReadSensor.Size = new System.Drawing.Size(120, 47);
             this.btnReadSensor.TabIndex = 4;
             this.btnReadSensor.Text = "Read Sensor";
             this.btnReadSensor.UseVisualStyleBackColor = true;
             this.btnReadSensor.Click += new System.EventHandler(this.btnReadSensor_Click);
+            // 
+            // LdrReadClock
+            // 
+            this.LdrReadClock.Tick += new System.EventHandler(this.LdrReadClock_Tick);
+            // 
+            // tbReadTimeLdr
+            // 
+            this.tbReadTimeLdr.Enabled = false;
+            this.tbReadTimeLdr.Location = new System.Drawing.Point(6, 216);
+            this.tbReadTimeLdr.Name = "tbReadTimeLdr";
+            this.tbReadTimeLdr.Size = new System.Drawing.Size(100, 20);
+            this.tbReadTimeLdr.TabIndex = 11;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 197);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(105, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Real time LDR value";
             // 
             // Form1
             // 
@@ -339,6 +366,9 @@
         private System.Windows.Forms.Button btnReadSensor;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbSensorValue;
+        private System.Windows.Forms.Timer LdrReadClock;
+        private System.Windows.Forms.TextBox tbReadTimeLdr;
+        private System.Windows.Forms.Label label3;
     }
 }
 

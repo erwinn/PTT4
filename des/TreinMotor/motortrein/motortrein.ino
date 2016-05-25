@@ -26,6 +26,7 @@ PID myPID(&RPM, &Output, &Setpoint, 0.6, 0.5, 0.1, DIRECT);
 
 void setup()
 {
+  Setpoint=0;
   pinMode(SpeedSensorPin, INPUT);
   pinMode(MotorPWR, OUTPUT);
   pinMode(MotorDir, OUTPUT);
@@ -59,7 +60,7 @@ void loop()
   if (i && msg.adrsValue == TREIN)
   {
     int treinid = msg.data[1];
-
+    Setpoint=msg.data[0];
     //MotorControl
     RefreshRPM();
     myPID.Compute();

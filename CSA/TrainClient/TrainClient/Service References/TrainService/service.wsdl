@@ -22,8 +22,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetActuatorValue">
-      <soap:operation soapAction="TrainService/ITrainService/GetActuatorValue" style="document" />
+    <wsdl:operation name="GetSensorValue">
+      <soap:operation soapAction="TrainService/ITrainService/GetSensorValue" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

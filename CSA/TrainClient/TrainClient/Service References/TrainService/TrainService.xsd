@@ -28,17 +28,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetActuatorValue">
+  <xs:element name="GetSensorValue">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="actuator" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetActuatorValueResponse">
+  <xs:element name="GetSensorValueResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GetActuatorValueResult" type="xs:int" />
+        <xs:element minOccurs="0" name="GetSensorValueResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -41,7 +41,7 @@ namespace TrainClient
         public bool WriteActuatorValue(int actuator, int value)
         {
             string message = proxy.MessageBuilder(actuator, value, "ArduinoSetSpeed");
-            return true; //0 t/m 220
+            return true; //0 t/m 22
         }
 
         public int ReadSensorState(int SensorId)

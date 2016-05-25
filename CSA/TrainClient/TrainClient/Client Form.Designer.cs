@@ -46,11 +46,11 @@
             this.lblSensor = new System.Windows.Forms.Label();
             this.lblState2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbSensorValue = new System.Windows.Forms.TextBox();
             this.tbSensorId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnReadSensor = new System.Windows.Forms.Button();
-            this.tbSensorValue = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.gbSwitchTrack.SuspendLayout();
             this.gbStopTrain.SuspendLayout();
             this.gbWriteSensorState.SuspendLayout();
@@ -206,6 +206,7 @@
             this.tbActuatorId.Name = "tbActuatorId";
             this.tbActuatorId.Size = new System.Drawing.Size(100, 20);
             this.tbActuatorId.TabIndex = 8;
+            this.tbActuatorId.Text = "2";
             // 
             // lblSensor
             // 
@@ -239,6 +240,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Read Sensor";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 93);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Sensor Value";
+            // 
+            // tbSensorValue
+            // 
+            this.tbSensorValue.Location = new System.Drawing.Point(9, 112);
+            this.tbSensorValue.Name = "tbSensorValue";
+            this.tbSensorValue.Size = new System.Drawing.Size(100, 20);
+            this.tbSensorValue.TabIndex = 9;
+            // 
             // tbSensorId
             // 
             this.tbSensorId.Location = new System.Drawing.Point(8, 52);
@@ -264,22 +281,6 @@
             this.btnReadSensor.Text = "Read Sensor";
             this.btnReadSensor.UseVisualStyleBackColor = true;
             this.btnReadSensor.Click += new System.EventHandler(this.btnReadSensor_Click);
-            // 
-            // tbSensorValue
-            // 
-            this.tbSensorValue.Location = new System.Drawing.Point(9, 112);
-            this.tbSensorValue.Name = "tbSensorValue";
-            this.tbSensorValue.Size = new System.Drawing.Size(100, 20);
-            this.tbSensorValue.TabIndex = 9;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 93);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 13);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Sensor Value";
             // 
             // Form1
             // 

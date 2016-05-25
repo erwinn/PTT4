@@ -80,18 +80,21 @@ namespace TrainService
      
         private void extractnumbers(string word)
         {
+             
             if(!word.Any(c => char.IsDigit(c)))
             {
                 return;
             }
             string resultString = Regex.Match(word, @"\d+").Value;
-            if (word.Contains("SENSORA"))
+            if (word.Contains("datatransmitterA"))
             {
                 sensorarray[0] = Convert.ToInt32(resultString);
+                
             }
-            else if (word.Contains("SENSORB"))
+            else if (word.Contains("datatransmitterB"))
             {
                 sensorarray[1] = Convert.ToInt32(resultString);
+                
             }
         }
         private void readarduino()
@@ -102,7 +105,7 @@ namespace TrainService
                     {
                         string text = _serialPort.ReadLine();
                         extractnumbers(text);
-                        Debug.WriteLine(text);
+                        
                     }
                 }
         }

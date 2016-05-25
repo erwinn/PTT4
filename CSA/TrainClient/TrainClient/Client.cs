@@ -24,7 +24,7 @@ namespace TrainClient
 
        public void Run(int trainId)
         {
-
+            string message = proxy.MessageBuilder(trainId, 1, "ArduinoStartTrain");
         }
 
         public bool SwitchTrack(int id, int state)

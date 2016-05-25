@@ -5,6 +5,7 @@ wit = aarde				Niet aangesloten
 grijs = voeding knoppen			L+
 wit/grijs = startknop			IA.0
 Bruin/Blauw = stopknop			IA.1
+geen kabel = resetknop			IA.2
 Blauw/Wit = motor 1 knop boven		IB.0
 Goren/Wit = motor 1 knop zijkant	IB.1
 Geel/Wit = motor 2 knop boven		IB.2

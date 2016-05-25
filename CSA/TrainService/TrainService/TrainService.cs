@@ -24,15 +24,14 @@ namespace TrainService
         }
         public int getLrdValue(int ldrId)
         {
-            if(ldrId==1)
+            if (serialClass.getSensorArray().Length >= ldrId)
             {
-                return serialClass.getSensorArray()[0];
+                return serialClass.getSensorArray()[ldrId + 1];
             }
-            else if (ldrId == 2)
+            else
             {
-                return serialClass.getSensorArray()[1];
+                throw new ArgumentOutOfRangeException("LdrId", ldrId, "You looked outside the array, returned error");
             }
-            return 0;
         }
         public string MessageBuilder(int id, int value, string MessageType)
         {

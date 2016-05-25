@@ -1,9 +1,9 @@
 Begin DDE Information.
     Last DDE Source:	3
 Begin DDE Source Definition.
-    Source Name:		PLC
+    Source Name:		PLC11
     Application Name:		server_runtime
-    Topic Name:			PLC1
+    Topic Name:			LoadingPLC
     DDE Source ID:		3
     Request Initial Data:	1
     Always Advise:		0

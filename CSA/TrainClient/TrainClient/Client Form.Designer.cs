@@ -47,15 +47,15 @@
             this.lblSensor = new System.Windows.Forms.Label();
             this.lblState2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbDanger = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbReadTimeLdr = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tbSensorValue = new System.Windows.Forms.TextBox();
             this.tbSensorId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnReadSensor = new System.Windows.Forms.Button();
             this.LdrReadClock = new System.Windows.Forms.Timer(this.components);
-            this.tbReadTimeLdr = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbDanger = new System.Windows.Forms.TextBox();
             this.gbSwitchTrack.SuspendLayout();
             this.gbStopTrain.SuspendLayout();
             this.gbWriteSensorState.SuspendLayout();
@@ -253,6 +253,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Read Sensor";
             // 
+            // tbDanger
+            // 
+            this.tbDanger.Enabled = false;
+            this.tbDanger.Location = new System.Drawing.Point(6, 215);
+            this.tbDanger.Name = "tbDanger";
+            this.tbDanger.Size = new System.Drawing.Size(100, 20);
+            this.tbDanger.TabIndex = 13;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 170);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(105, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Real time LDR value";
+            // 
+            // tbReadTimeLdr
+            // 
+            this.tbReadTimeLdr.Enabled = false;
+            this.tbReadTimeLdr.Location = new System.Drawing.Point(6, 189);
+            this.tbReadTimeLdr.Name = "tbReadTimeLdr";
+            this.tbReadTimeLdr.Size = new System.Drawing.Size(100, 20);
+            this.tbReadTimeLdr.TabIndex = 11;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -299,32 +324,8 @@
             // 
             // LdrReadClock
             // 
+            this.LdrReadClock.Enabled = true;
             this.LdrReadClock.Tick += new System.EventHandler(this.LdrReadClock_Tick);
-            // 
-            // tbReadTimeLdr
-            // 
-            this.tbReadTimeLdr.Enabled = false;
-            this.tbReadTimeLdr.Location = new System.Drawing.Point(6, 189);
-            this.tbReadTimeLdr.Name = "tbReadTimeLdr";
-            this.tbReadTimeLdr.Size = new System.Drawing.Size(100, 20);
-            this.tbReadTimeLdr.TabIndex = 11;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 170);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Real time LDR value";
-            // 
-            // tbDanger
-            // 
-            this.tbDanger.Enabled = false;
-            this.tbDanger.Location = new System.Drawing.Point(6, 215);
-            this.tbDanger.Name = "tbDanger";
-            this.tbDanger.Size = new System.Drawing.Size(100, 20);
-            this.tbDanger.TabIndex = 13;
             // 
             // Form1
             // 
@@ -376,10 +377,10 @@
         private System.Windows.Forms.Button btnReadSensor;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbSensorValue;
-        private System.Windows.Forms.Timer LdrReadClock;
         private System.Windows.Forms.TextBox tbReadTimeLdr;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbDanger;
+        internal System.Windows.Forms.Timer LdrReadClock;
     }
 }
 

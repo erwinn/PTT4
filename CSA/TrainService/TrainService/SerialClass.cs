@@ -11,7 +11,7 @@ namespace TrainService
 {
     public class SerialClass
     {
-        Timer timer1 = new Timer(3000);
+        Timer timer1 = new Timer(750);
         int[] sensorarray = new int[2];
         bool blocktimer = false;
         SerialPort _serialPort = new SerialPort();
@@ -80,7 +80,7 @@ namespace TrainService
      
         private void extractnumbers(string word)
         {
-             
+              
             if(!word.Any(c => char.IsDigit(c)))
             {
                 return;

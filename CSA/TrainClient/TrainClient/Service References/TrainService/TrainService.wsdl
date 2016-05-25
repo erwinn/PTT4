@@ -18,6 +18,12 @@
   <wsdl:message name="ITrainService_MessageCollect_OutputMessage">
     <wsdl:part name="parameters" element="tns:MessageCollectResponse" />
   </wsdl:message>
+  <wsdl:message name="ITrainService_GetActuatorValue_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetActuatorValue" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_GetActuatorValue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetActuatorValueResponse" />
+  </wsdl:message>
   <wsdl:message name="ITrainService_MessageSendArduino_InputMessage">
     <wsdl:part name="parameters" element="tns:MessageSendArduino" />
   </wsdl:message>
@@ -44,6 +50,10 @@
     <wsdl:operation name="MessageCollect">
       <wsdl:input wsaw:Action="TrainService/ITrainService/MessageCollect" message="tns:ITrainService_MessageCollect_InputMessage" />
       <wsdl:output wsaw:Action="TrainService/ITrainService/MessageCollectResponse" message="tns:ITrainService_MessageCollect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActuatorValue">
+      <wsdl:input wsaw:Action="TrainService/ITrainService/GetActuatorValue" message="tns:ITrainService_GetActuatorValue_InputMessage" />
+      <wsdl:output wsaw:Action="TrainService/ITrainService/GetActuatorValueResponse" message="tns:ITrainService_GetActuatorValue_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="MessageSendArduino">
       <wsdl:input wsaw:Action="TrainService/ITrainService/MessageSendArduino" message="tns:ITrainService_MessageSendArduino_InputMessage" />

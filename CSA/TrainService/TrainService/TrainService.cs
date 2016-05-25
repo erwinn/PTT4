@@ -22,15 +22,15 @@ namespace TrainService
         {
             throw new NotImplementedException();
         }
-        public int getLrdValue(int ldrId)
+        public int GetSensorValue(int sensor)
         {
-            if (serialClass.getSensorArray().Length >= ldrId)
+            if (serialClass.getSensorArray().Length >= sensor)
             {
-                return serialClass.getSensorArray()[ldrId - 1];
+                return serialClass.getSensorArray()[sensor - 1];
             }
             else
             {
-                throw new ArgumentOutOfRangeException("LdrId", ldrId, "You looked outside the array, returned error");
+                throw new ArgumentOutOfRangeException("LdrId", sensor, "You looked outside the array, returned error");
             }
         }
         public string MessageBuilder(int id, int value, string MessageType)

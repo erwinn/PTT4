@@ -19,10 +19,10 @@ namespace TrainClient
 
         public void Refresh()
         {
-           
+
         }
 
-       public void Run(int trainId)
+        public void Run(int trainId)
         {
             string message = proxy.MessageBuilder(trainId, 1, "ArduinoStartTrain");
         }
@@ -35,13 +35,20 @@ namespace TrainClient
 
         public void StopTrain(int trainId)
         {
-            string message = proxy.MessageBuilder(trainId, 0, "ArduinoStopTrain"); 
+            string message = proxy.MessageBuilder(trainId, 0, "ArduinoStopTrain");
         }
 
-       public bool WriteSensorState(int sensor, int value)
-       {
-            string message = proxy.MessageBuilder(sensor, value, "ArduinoSetSpeed"); 
-             return true; //0 t/m 255
-       }
+        public bool WriteActuatorValue(int actuator, int value)
+        {
+            string message = proxy.MessageBuilder(actuator, value, "ArduinoSetSpeed");
+            return true; //0 t/m 220
+        }
+
+        public int ReadSensorState(int SensorId)
+        {
+            int value = proxy.GetSensorValue(SensorId);
+            return value;
+        }
+
     }
 }

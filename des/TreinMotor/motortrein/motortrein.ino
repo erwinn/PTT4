@@ -3,16 +3,17 @@
 #include <PID_v1.h>
 #include <SPI.h>
 #include <MCP2515.h>
+#include <SoftwareSerial.h>
 
 #define TREIN 0x7d3
-
 #define MotorPWR 3
 #define MotorDir 12
 #define SpeedSensorPin A5
 
+SoftwareSerial mySerial(5, 6);
+
 int delaynr = 5;
 String s = "";
-
 CANMSG msg;
 MCP2515 can;
 
@@ -26,6 +27,11 @@ PID myPID(&RPM, &Output, &Setpoint, 0.6, 0.5, 0.1, DIRECT);
 
 void setup()
 {
+  mySerial.begin(9600);
+  mySerial.println("-----------------------------------------");
+ mySerial.println("-----------------------------------------");
+  mySerial.println("-----------------------------------------");
+  mySerial.println("-----------------------------------------");
   Setpoint=0;
   pinMode(SpeedSensorPin, INPUT);
   pinMode(MotorPWR, OUTPUT);
@@ -48,25 +54,26 @@ void setup()
     Serial.println("setCANNormalMode() failed");
     while (1);
   }
-
 }
 
 
 void loop()
 {
-
   //receiver
   int i = can.receiveCANMessage(&msg, 1000);
   if (i && msg.adrsValue == TREIN)
   {
     int treinid = msg.data[1];
     Setpoint=msg.data[0];
+    mySerial.println(String(Setpoint));
+    
     //MotorControl
     RefreshRPM();
     myPID.Compute();
     analogWrite(MotorPWR, Output);
   }
 }
+/*
 int extractintfromstring(String msg)
 {
   String tempstring = "";
@@ -79,4 +86,4 @@ int extractintfromstring(String msg)
   }
   return tempstring.toInt();
 }
-
+*/

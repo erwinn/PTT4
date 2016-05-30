@@ -1,29 +1,37 @@
 #include <SPI.h>
 #include <MCP2515.h>
+
 #define SENSOR_1 0x7d1
 #define SENSOR_2 0x7d2
 #define TREIN 0x7d3
 #define SPOORWEGOVERGANG 0x7d4
 #define SPOORWISSEL 0x7d5
- 
-//
+#include <SoftwareSerial.h>
+
 int delaynr=5;
 String s = "";
-int datatransmitter1=0;
-int datatransmitter2=0;
+int datatransmitter1=120;
+int datatransmitter2=120;
 
 CANMSG readmsg;
 MCP2515 can;
 CANMSG sendmsg;
 
+SoftwareSerial mySerial(5, 6);
+
 void setup()
 {
-
-
-
   
-pinMode(8, OUTPUT);
-pinMode(7, OUTPUT);
+  mySerial.begin(9600);
+  mySerial.println("-----------------------------------------");
+  mySerial.println("-----------------------------------------");
+  mySerial.println("-----------------------------------------");
+  mySerial.println("-----------------------------------------"); 
+ 
+  
+  pinMode(8, OUTPUT);
+  pinMode(7, OUTPUT);
+
   Serial.begin(9600); 
   while(!Serial);
   Serial.println("Go...");
@@ -42,9 +50,6 @@ pinMode(7, OUTPUT);
   sendmsg.isExtendedAdrs = false;
   sendmsg.rtr = false;
   sendmsg.dataLength=8;
-
-  
- 
 }
 
 void readCsharp()
@@ -64,52 +69,60 @@ void readCsharp()
       message ="datatransmitterB "+String(datatransmitter2);
       Serial.println(message);
     }   
-    if(s=="turnon")
+    else if(s=="turnon")
     {
       turnon();
     }
-    if(Startwith(s, "ArduinoSwitchTrackA"))
+    else if(Startwith(s, "ArduinoSwitchTrackA"))
     {
+      //mySerial.println(s);
       sendmsg.data[0]=extractintfromstring(s);
       sendmsg.data[1]=1;
       sendcanmsg(SPOORWISSEL);
     }
-    if(Startwith(s, "ArduinoSwitchTrackB"))
+    else if(Startwith(s, "ArduinoSwitchTrackB"))
     {
+    //  mySerial.println(s);
       sendmsg.data[0]=extractintfromstring(s);
       sendmsg.data[1]=2;
       sendcanmsg(SPOORWISSEL);
     }
-    if(Startwith(s, "ArduinoStopTrainA"))
+    else if(Startwith(s, "ArduinoStopTrainA"))
     {
+    //  mySerial.println(s);
       sendmsg.data[0]=0;
       sendmsg.data[1]=1;
       sendcanmsg(TREIN);
-      Serial.println(s);
+     
     }
-    if(Startwith(s, "ArduinoStopTrainB"))
+    else if(Startwith(s, "ArduinoStopTrainB"))
     {
+     // mySerial.println(s);
       sendmsg.data[0]=0;
       sendmsg.data[1]=1;
       sendcanmsg(TREIN);
     }
-    if(Startwith(s, "ArduinoSetSpeedA"))
+    else if(Startwith(s, "ArduinoSetSpeedA"))
     {
+      
       sendmsg.data[0]=extractintfromstring(s);
-   
+    //  mySerial.println(String(sendmsg.data[0]));
       sendmsg.data[1]=1;
       sendcanmsg(TREIN);
-      Serial.println(s);
+    
     }
-    if(Startwith(s, "ArduinoSetSpeedB"))
+    else if(Startwith(s, "ArduinoSetSpeedB"))
     {
       sendmsg.data[0]=extractintfromstring(s);
+    //  mySerial.println(String(sendmsg.data[0]));
       sendmsg.data[1]=1;
       sendcanmsg(TREIN);
-      Serial.println(s);
+    }
+    else if(s!="")
+    {
+      mySerial.println(s);
     }
     /////////////////////////////////////////
-    
     ///////////////////////////////////
     s="";
   }
@@ -124,11 +137,11 @@ void turnon()
 {
   digitalWrite(8,HIGH);
   digitalWrite(7,HIGH);
-
   delay(1500);
   digitalWrite(8,LOW);
   digitalWrite(7,LOW);
 }
+/*
 bool Startwith(String s, String search)
 {
 int max =search.length(); // the searchstring has to fit in the other one  
@@ -139,7 +152,7 @@ if (s.substring(0,i) == search) return true;  // or i
 }
 return false;  //or -1
 }
-
+*/
 void loop()
 {
  
@@ -147,22 +160,15 @@ void loop()
   int i = can.receiveCANMessage(&readmsg, 1000);
   if(i&&readmsg.adrsValue==SENSOR_1)
   { 
-    /*
-    Serial.print(msg.data[0]);
-     Serial.print(" ");
-    Serial.println(msg.adrsValue);*/
+     
     datatransmitter1=readmsg.data[0];
   }
   else if(i&&readmsg.adrsValue==SENSOR_2)
   {
-/*
-    Serial.print(msg.data[0]);
-     Serial.print(" ");
-    Serial.println(msg.adrsValue);*/
     datatransmitter2=readmsg.data[0];
   }
   readCsharp();
-  delay(delaynr);
+  //delay(delaynr);
 }
 int extractintfromstring(String msg)
 {
@@ -176,3 +182,23 @@ int extractintfromstring(String msg)
   } 
   return tempstring.toInt();
 }
+
+
+
+bool Startwith(String s, String search)
+        {
+            int total = s.length() - search.length();
+            for (int i = 0; i < total+1; i++)
+            {
+                                
+                if (s.substring(i, i+search.length()) == search)
+                 {
+
+                     return true;
+                 }
+            }
+            return false;
+        }
+
+ 
+ 

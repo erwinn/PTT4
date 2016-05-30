@@ -8,7 +8,7 @@ double Output;
 
 long TimePassed;
 double RPM;
-double Setpoint = 160;
+double Setpoint = 80;
   
 PID myPID(&RPM, &Output, &Setpoint, 0.6, 0.5, 0.1, DIRECT);
 

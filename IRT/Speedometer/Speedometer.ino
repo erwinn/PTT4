@@ -1,38 +1,61 @@
 #include <PID_v1.h>
 
+//Define used Pins
 #define MotorPWR 3
 #define MotorDir 12
 #define SpeedSensorPin A5
 
-double Output;
+//Motor Constants
+#define MotorPowerMin 25
+#define MotorPowerMax 255
 
-long TimePassed;
-double RPM;
+//The Wanted Accuracy (>0). the higher the number, the longer the test runs, and the more accurate the result is
+//Default = 5, a full circle = 20
+#define SpeedSensorAccuracy 5
+
+//Smoothing of SpeedData (>0)
+#define ItemsInArray 5
+
+//PID constants
+#define Kp 0.1
+#define Ki 0.5
+#define Kd 0
+
+//PID Variables
+double Output;
+double AverageRPM;
 double Setpoint = 80;
-  
-PID myPID(&RPM, &Output, &Setpoint, 0.6, 0.5, 0.1, DIRECT);
+
+//Speed Sensor Data Array
+double RPM[ItemsInArray];
+
+//for measuring time in the code
+long TimePassed;
+
+//Setup PID Controller using above specified Variables
+PID myPID(&AverageRPM, &Output, &Setpoint, Kp, Ki, Kd, DIRECT);
 
 void setup() {
-  // put your setup code here, to run once:
+  //Set PinMode
   pinMode(SpeedSensorPin, INPUT);
   pinMode(MotorPWR, OUTPUT);
   pinMode(MotorDir, OUTPUT);
-  digitalWrite(MotorDir, LOW);
-  
-  Serial.begin(9600);
 
-  myPID.SetMode(AUTOMATIC);
+  //set the motor in the correct Direction
+  digitalWrite(MotorDir, LOW);
+
+  //Turn the PID Controller ON:
+  myPID.SetMode(HIGH);
+
+  //Time between each PID calculation:
+  myPID.SetSampleTime(200);
+
+  //set limits to the output, in this case the motor
+  myPID.SetOutputLimits(MotorPowerMin, MotorPowerMax);
 }
 
 void loop()
 {
-  RefreshRPM();
-  if ((millis() - TimePassed) > 1000)
-  {
-    Serial.print("RPM: ");
-    Serial.println(RPM);
-    TimePassed = millis();
-  }
-  myPID.Compute();
-  analogWrite(MotorPWR, Output);
+  //Measure The Speed of the motor, and adjust power to the motor accordingly
+  RefreshRPM(SpeedSensorAccuracy);
 }

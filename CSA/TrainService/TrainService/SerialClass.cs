@@ -60,7 +60,7 @@ namespace TrainService
             }
             //_serialPort.PortName = ports[0];
             _serialPort.PortName = "COM9";
-            _serialPort.Open();
+            //_serialPort.Open();
             if (_serialPort.IsOpen){
                 Debug.WriteLine("open");
                 //sendCmd("datarequest");

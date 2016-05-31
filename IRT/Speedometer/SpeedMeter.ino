@@ -1,4 +1,6 @@
 //Calculates the speed of the motor
+//
+//int Accuracy,     the number wich defines how accurate the measurement is, the higher, the better
 void RefreshRPM(int Accuracy)
 {
   //if the wanted speed is 0, set RPM and Motor PWR to 0, else run the RPM measurement
@@ -9,7 +11,7 @@ void RefreshRPM(int Accuracy)
     AddValue(RPM, ItemsInArray, 0);
     CalculateAverage(RPM, ItemsInArray);
   }
-  else 
+  else
   {
     //Declaring Temporary Values
     int MeasurementsDone = 0;
@@ -32,13 +34,13 @@ void RefreshRPM(int Accuracy)
         MeasurementsDone++;
       }
     }
-    
+
     //if the measurement timed out, set RPM to 0
     if ((millis() - TimeOfLastMeasurement) > (Accuracy * 90))
     {
       AddValue(RPM, ItemsInArray, 0);
     }
-    
+
     //if the measurement was succesfull, set the RPM to the actual RPM
     else
     {
@@ -46,7 +48,7 @@ void RefreshRPM(int Accuracy)
       double TimeTensSeconds = MeasuredTime / 100;
       AddValue(RPM, ItemsInArray, (30 * Accuracy) / TimeTensSeconds);
     }
-    
+
     //Compute the new values for speed
     CalculateAverage(RPM, ItemsInArray);
     myPID.Compute();
@@ -65,30 +67,49 @@ void RefreshRPM(int Accuracy)
 }
 
 //Calculates the average nuber inside the array
+//
+//double Array[],   The array in wich all the data is stored
+//int Count,        The number of items inside the Array
+//
+//Returns The calculated average inside the array
 double CalculateAverage(double Array[], int Count)
 {
+  //declare local Variables
   double total = 0;
   int UsableValues = 0;
+
+  //Look inside every value inside the array
   for (int i = 0; i < Count; i++)
   {
-    if (Array[i] > 0) 
+    //only select valid data, no timeout data
+    if (Array[i] > 0)
     {
       UsableValues++;
       total += Array[i];
     }
   }
-  if (UsableValues <= 0) return 0;
-  AverageRPM = total / UsableValues;
+
+  //if there is no valid data, set AverageRPM to 0
+  if (UsableValues <= 0) AverageRPM = 0;
+  else AverageRPM = total / UsableValues;
+
+  //return the AverageRPM
   return AverageRPM;
 }
 
 //Moves all values inside the array forward by one, then inserts the new value in the last index
+//
+//double Array[],   The array in wich all the data is stored
+//int Count,        The number of items inside the Array
+//double value,     The value that needs to be placed inside the array
 void AddValue(double Array[], int Count, double value)
 {
-  double total = 0;
+  //move every value forward by one
   for (int i = 0; i < Count - 1; i++)
   {
     Array[i] = Array[i + 1];
   }
+
+  //insert a new value at the last index of the array
   Array[Count - 1] = value;
 }

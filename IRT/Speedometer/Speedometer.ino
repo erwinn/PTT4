@@ -1,9 +1,12 @@
 #include <PID_v1.h>
+#include <SoftwareSerial.h>
+#include <serLCD.h>
 
 //Define used Pins
 #define MotorPWR 3
 #define MotorDir 12
 #define SpeedSensorPin A5
+#define LCDPin 6
 
 //Motor Constants
 #define MotorPowerMin 30      //the motor does not run under this value, it will stop
@@ -24,7 +27,7 @@
 //PID Variables
 double Output;
 double AverageRPM;
-double Setpoint = 50;
+double Setpoint = 45;
 
 //Speed Sensor Data Array
 double RPM[ItemsInArray];
@@ -35,9 +38,15 @@ long TimePassed;
 //Setup PID Controller using above specified Variables
 PID myPID(&AverageRPM, &Output, &Setpoint, Kp, Ki, Kd, DIRECT);
 
+//Define SerialLCD Display
+serLCD lcd(LCDPin);
+
+
 void setup() {
-  Serial.begin(9600);
-  
+  //clear Display
+  lcd.setBrightness(30);
+  lcd.clear();
+  lcd.print("Speedometer");
   //Set PinMode
   pinMode(SpeedSensorPin, INPUT);
   pinMode(MotorPWR, OUTPUT);
@@ -63,7 +72,20 @@ void loop()
   if (millis() - TimePassed > 2000)
   {
     TimePassed = millis();
-    Serial.print("RPM: ");
-    Serial.println(AverageRPM);
+    lcd.selectLine(2);
+    lcd.clearLine(2);
+    lcd.print("RPM:          ");
+    if (AverageRPM < 100)  lcd.print('0');
+    if (AverageRPM < 10)  lcd.print('0');
+    lcd.print(AverageRPM);
+    lcd.print("Output:       ");
+    if (Output < 100)  lcd.print('0');
+    if (Output < 10)  lcd.print('0');
+    lcd.print(Output);
+    lcd.print("Setpoint:     ");
+    if (Setpoint < 100)  lcd.print('0');
+    if (Setpoint < 10)  lcd.print('0');
+    lcd.print(Setpoint);
+
   }
 }

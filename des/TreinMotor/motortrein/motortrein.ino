@@ -75,12 +75,14 @@ void setup()
   SPI.setClockDivider(SPI_CLOCK_DIV8);
   if (can.initCAN(CAN_BAUD_100K) == 0)
   {
-    Serial.println("initCAN() failed");
+    lcd.clear();
+    lcd.print("initCAN() failed");
     while (1);
   }
   if (can.setCANNormalMode(LOW) == 0) //normal mode non single shot
   {
-    Serial.println("setCANNormalMode() failed");
+    lcd.clear();
+    lcd.print("setCANNormalMode() failed");
     while (1);
   }
 }

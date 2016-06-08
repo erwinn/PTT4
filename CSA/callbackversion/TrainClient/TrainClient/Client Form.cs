@@ -69,11 +69,15 @@ namespace TrainClient
 
         private void subscribebtn_Click(object sender, EventArgs e)
         {
+            unsubscribebtn.Enabled = true;
+            subscribebtn.Enabled = false;
             client.Subscribe();    
         }
 
         private void unsubscribebtn_Click(object sender, EventArgs e)
         {
+            unsubscribebtn.Enabled = false;
+            subscribebtn.Enabled = true;
             client.Unsubscribe();    
         }
 

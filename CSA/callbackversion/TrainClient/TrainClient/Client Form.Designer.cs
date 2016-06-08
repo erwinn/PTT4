@@ -342,6 +342,7 @@
             // 
             // unsubscribebtn
             // 
+            this.unsubscribebtn.Enabled = false;
             this.unsubscribebtn.Location = new System.Drawing.Point(146, 324);
             this.unsubscribebtn.Name = "unsubscribebtn";
             this.unsubscribebtn.Size = new System.Drawing.Size(87, 23);

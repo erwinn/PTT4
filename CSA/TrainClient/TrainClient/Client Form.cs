@@ -56,11 +56,11 @@ namespace TrainClient
             int valueLdr = client.ReadSensorState(1);
             tbReadTimeLdr.Text = valueLdr.ToString();
 
-            if (valueLdr < 10)
+            if (valueLdr == 1)
             {
                 tbDanger.Text = "Danger!";
             }
-            else
+            else if (valueLdr == 0)
             {
                 tbDanger.Text = "safe";
             }

@@ -12,6 +12,8 @@ namespace TrainService
     public class SerialClass
     {
         Timer timer1 = new Timer(750);
+        Timer timer2 = new Timer(3000);
+
         int[] sensorarray = new int[2];
         bool blocktimer = false;
         
@@ -23,6 +25,8 @@ namespace TrainService
             Debug.WriteLine("constructor SerialClass() ");
             timer1.Elapsed += timer1_Tick;
             timer1.Enabled = true;
+            timer2.Elapsed += timer2_Tick;
+            timer2.Enabled = false;
             _serialPort.BaudRate = 9600;
             _serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
         }
@@ -80,6 +84,10 @@ namespace TrainService
                
             }
         }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            sendCmd("ArduinoStopTrainA");
+        }
      
         private void extractnumbers(string word)
         {
@@ -99,6 +107,8 @@ namespace TrainService
                 sensorarray[1] = Convert.ToInt32(resultString);
                 
             }
+
+            
             Debug.WriteLine("sensora"+ sensorarray[0]);
             Debug.WriteLine("sensorb"+ sensorarray[0]);
         }
@@ -110,7 +120,15 @@ namespace TrainService
                     {
                         string text = _serialPort.ReadLine();
                         extractnumbers(text);
-                        
+
+                        if (sensorarray[0]==1||sensorarray[1]==1)
+                        {
+                            timer2.Enabled = true;
+                        }
+                        else
+                        {
+                            timer2.Enabled = false;
+                        }
                     }
                 }
         }

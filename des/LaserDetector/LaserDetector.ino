@@ -3,6 +3,9 @@
 #include <SoftwareSerial.h>
 #include <serLCD.h>
 
+//Adress of this arduino
+#define SENSOR_ADRESS 0x7d1
+
 //define Pins
 #define LDR1 A0
 #define LDR2 A1
@@ -63,7 +66,7 @@ void loop() {
   else if (Value2 < 600) Block2 = false;
 
   //Display Sensor Data
-  if (millis() - TimePassed > 250)
+  if (millis() - TimePassed > 200)
   {
     TimePassed = millis();
 
@@ -80,5 +83,16 @@ void loop() {
     lcd.print("SENSOR2: ");
     if (Block2) lcd.print("    Blocked");
     else        lcd.print("Not Blocked");
+    SendMessage(Block1 || Block2, SENSOR_ADRESS);
   }
+}
+
+void SendMessage(int value, int adress)
+{
+  msg.adrsValue = adress;
+  msg.isExtendedAdrs = false;
+  msg.rtr = false;
+  msg.dataLength = 1;
+  msg.data[0] = value;
+  can.transmitCANMessage(msg, 1000);  
 }

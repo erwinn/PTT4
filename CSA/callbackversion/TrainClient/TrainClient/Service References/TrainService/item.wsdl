@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="TrainService" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="TrainService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="TrainService/Imports">
+      <xsd:import schemaLocation="http://localhost:8733/TrainService/?xsd=xsd0" namespace="TrainService" />
+      <xsd:import schemaLocation="http://localhost:8733/TrainService/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ITrainService_MessageBuilder_InputMessage">
+    <wsdl:part name="parameters" element="tns:MessageBuilder" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_MessageBuilder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MessageBuilderResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_MessageCollect_InputMessage">
+    <wsdl:part name="parameters" element="tns:MessageCollect" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_MessageCollect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MessageCollectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_GetSensorValue_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSensorValue" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_GetSensorValue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSensorValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_MessageSendArduino_InputMessage">
+    <wsdl:part name="parameters" element="tns:MessageSendArduino" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_MessageSendArduino_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MessageSendArduinoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_MessageSendPLC_InputMessage">
+    <wsdl:part name="parameters" element="tns:MessageSendPLC" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_MessageSendPLC_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MessageSendPLCResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_Error_InputMessage">
+    <wsdl:part name="parameters" element="tns:Error" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_Error_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ErrorResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ITrainService">
+    <wsdl:operation name="MessageBuilder">
+      <wsdl:input wsaw:Action="TrainService/ITrainService/MessageBuilder" message="tns:ITrainService_MessageBuilder_InputMessage" />
+      <wsdl:output wsaw:Action="TrainService/ITrainService/MessageBuilderResponse" message="tns:ITrainService_MessageBuilder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MessageCollect">
+      <wsdl:input wsaw:Action="TrainService/ITrainService/MessageCollect" message="tns:ITrainService_MessageCollect_InputMessage" />
+      <wsdl:output wsaw:Action="TrainService/ITrainService/MessageCollectResponse" message="tns:ITrainService_MessageCollect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSensorValue">
+      <wsdl:input wsaw:Action="TrainService/ITrainService/GetSensorValue" message="tns:ITrainService_GetSensorValue_InputMessage" />
+      <wsdl:output wsaw:Action="TrainService/ITrainService/GetSensorValueResponse" message="tns:ITrainService_GetSensorValue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MessageSendArduino">
+      <wsdl:input wsaw:Action="TrainService/ITrainService/MessageSendArduino" message="tns:ITrainService_MessageSendArduino_InputMessage" />
+      <wsdl:output wsaw:Action="TrainService/ITrainService/MessageSendArduinoResponse" message="tns:ITrainService_MessageSendArduino_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MessageSendPLC">
+      <wsdl:input wsaw:Action="TrainService/ITrainService/MessageSendPLC" message="tns:ITrainService_MessageSendPLC_InputMessage" />
+      <wsdl:output wsaw:Action="TrainService/ITrainService/MessageSendPLCResponse" message="tns:ITrainService_MessageSendPLC_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Error">
+      <wsdl:input wsaw:Action="TrainService/ITrainService/Error" message="tns:ITrainService_Error_InputMessage" />
+      <wsdl:output wsaw:Action="TrainService/ITrainService/ErrorResponse" message="tns:ITrainService_Error_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

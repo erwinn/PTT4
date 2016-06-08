@@ -14,9 +14,9 @@ namespace TrainService
         Timer timer1 = new Timer(750);
         int[] sensorarray = new int[2];
         bool blocktimer = false;
-        bool blocktimer2 = false;
+        
         SerialPort _serialPort = new SerialPort();
-        //string[] ports = SerialPort.GetPortNames();
+        string[] ports = SerialPort.GetPortNames();
 
         public SerialClass()
         {
@@ -51,7 +51,7 @@ namespace TrainService
             return false;
         }
         private void DataReceivedHandler(object sender,SerialDataReceivedEventArgs e ){
-            blocktimer2 = false;
+         
             readarduino();
         }
         public void Connect()
@@ -60,12 +60,12 @@ namespace TrainService
             if (ports == null || ports.Length==0){
                 return;
             }
-            //_serialPort.PortName = ports[0];
-            _serialPort.PortName = "COM9";
-            //_serialPort.Open();
+            _serialPort.PortName = ports[0];
+            _serialPort.PortName = "COM7";
+            _serialPort.Open();
             if (_serialPort.IsOpen){
                 Debug.WriteLine("open");
-                //sendCmd("datarequest");
+                sendCmd("datarequest");
                 timer1.Enabled = true;
             }
             else{
@@ -74,10 +74,10 @@ namespace TrainService
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (!blocktimer && !blocktimer2)
+            if (!blocktimer)
             {
                 sendCmd("datarequest");
-                blocktimer2 = true;
+               
             }
         }
      
@@ -99,6 +99,8 @@ namespace TrainService
                 sensorarray[1] = Convert.ToInt32(resultString);
                 
             }
+            Debug.WriteLine("sensora"+ sensorarray[0]);
+            Debug.WriteLine("sensorb"+ sensorarray[0]);
         }
         private void readarduino()
         {

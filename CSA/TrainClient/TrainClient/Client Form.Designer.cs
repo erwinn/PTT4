@@ -325,6 +325,7 @@
             // LdrReadClock
             // 
             this.LdrReadClock.Enabled = true;
+            this.LdrReadClock.Interval = 1000;
             this.LdrReadClock.Tick += new System.EventHandler(this.LdrReadClock_Tick);
             // 
             // Form1

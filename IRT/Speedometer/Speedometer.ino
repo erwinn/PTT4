@@ -27,7 +27,7 @@
 //PID Variables
 double Output;
 double AverageRPM;
-double Setpoint = 45;
+double Setpoint = 250;
 
 //Speed Sensor Data Array
 double RPM[ItemsInArray];

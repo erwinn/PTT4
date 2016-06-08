@@ -4,7 +4,8 @@
 #include <SoftwareSerial.h>
 #include <serLCD.h>
 
-#define TREIN 0x7d3
+#define TREIN_ADRESS 0x7d3
+#define TREIN_SPEED  0x7d2
 
 CANMSG msg;
 MCP2515 can;
@@ -14,6 +15,9 @@ MCP2515 can;
 #define MotorDir 12
 #define SpeedSensorPin A5
 #define LCDPin 6
+#define MotorBDir 13
+#define MotorBPWR 11
+#define MotorBBrake 8
 
 //Motor Constants
 #define MotorPowerMin 30      //the motor does not run under this value, it will stop
@@ -48,10 +52,11 @@ PID myPID(&AverageRPM, &Output, &Setpoint, Kp, Ki, Kd, DIRECT);
 //Define SerialLCD Display
 serLCD lcd(LCDPin);
 
+
 void setup()
 {
   //init Display
-  lcd.setBrightness(30);
+  lcd.setBrightness(10);
   lcd.clear();
   lcd.print("Speedometer");
 
@@ -62,9 +67,12 @@ void setup()
 
   //set the motor in the correct Direction
   digitalWrite(MotorDir, LOW);
+  digitalWrite(MotorBDir, LOW);
+  digitalWrite(MotorBPWR, LOW);
+  digitalWrite(MotorBBrake, LOW);
 
   //Turn the PID Controller ON:
-  myPID.SetMode(HIGH);
+  myPID.SetMode(AUTOMATIC);
 
   //Time between each PID calculation:
   myPID.SetSampleTime(200);
@@ -91,7 +99,7 @@ void loop()
 {
   //receiver
   int i = can.receiveCANMessage(&msg, 1000);
-  if (i && msg.adrsValue == TREIN)
+  if (i && msg.adrsValue == TREIN_ADRESS)
   {
     int treinid = msg.data[1];
     Setpoint = msg.data[0];
@@ -103,7 +111,7 @@ void loop()
   if (millis() - TimePassed > 2000)
   {
     TimePassed = millis();
-    
+
     //clear the data line:
     lcd.selectLine(2);
     lcd.clearLine(2);
@@ -116,14 +124,33 @@ void loop()
 
     //print the Current Output, add padding 0 if neccesary:
     lcd.print("Output:       ");
-    if (Output < 100)  lcd.print('0');
-    if (Output < 10)  lcd.print('0');
-    lcd.print(Output);
+    if (Setpoint <= 0)
+    {
+      lcd.print("000.00");
+    }
+    else
+    {
+      if (Output < 100)  lcd.print('0');
+      if (Output < 10)  lcd.print('0');
+      lcd.print(Output);
+    }
 
     //print the Current Setpoint, add padding 0 if neccesary:
     lcd.print("Setpoint:     ");
     if (Setpoint < 100)  lcd.print('0');
     if (Setpoint < 10)  lcd.print('0');
     lcd.print(Setpoint);
+    SendMessage(AverageRPM, TREIN_SPEED);
   }
+}
+
+//Send Message over CAN bus
+void SendMessage(int value, int adress)
+{
+  msg.adrsValue = adress;
+  msg.isExtendedAdrs = false;
+  msg.rtr = false;
+  msg.dataLength = 1;
+  msg.data[0] = value;
+  can.transmitCANMessage(msg, 1000);
 }

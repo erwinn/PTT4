@@ -12,7 +12,7 @@ namespace TrainClient.TrainService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="TrainService", ConfigurationName="TrainService.ITrainService")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="TrainService", ConfigurationName="TrainService.ITrainService", CallbackContract=typeof(TrainClient.TrainService.ITrainServiceCallback))]
     public interface ITrainService {
         
         [System.ServiceModel.OperationContractAttribute(Action="TrainService/ITrainService/MessageBuilder", ReplyAction="TrainService/ITrainService/MessageBuilderResponse")]
@@ -50,6 +50,25 @@ namespace TrainClient.TrainService {
         
         [System.ServiceModel.OperationContractAttribute(Action="TrainService/ITrainService/Error", ReplyAction="TrainService/ITrainService/ErrorResponse")]
         System.Threading.Tasks.Task ErrorAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="TrainService/ITrainService/Subscribe", ReplyAction="TrainService/ITrainService/SubscribeResponse")]
+        void Subscribe();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="TrainService/ITrainService/Subscribe", ReplyAction="TrainService/ITrainService/SubscribeResponse")]
+        System.Threading.Tasks.Task SubscribeAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="TrainService/ITrainService/UnSubscribe", ReplyAction="TrainService/ITrainService/UnSubscribeResponse")]
+        void UnSubscribe();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="TrainService/ITrainService/UnSubscribe", ReplyAction="TrainService/ITrainService/UnSubscribeResponse")]
+        System.Threading.Tasks.Task UnSubscribeAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ITrainServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="TrainService/ITrainService/OnEvent")]
+        void OnEvent(string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -58,25 +77,26 @@ namespace TrainClient.TrainService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class TrainServiceClient : System.ServiceModel.ClientBase<TrainClient.TrainService.ITrainService>, TrainClient.TrainService.ITrainService {
+    public partial class TrainServiceClient : System.ServiceModel.DuplexClientBase<TrainClient.TrainService.ITrainService>, TrainClient.TrainService.ITrainService {
         
-        public TrainServiceClient() {
+        public TrainServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
         }
         
-        public TrainServiceClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+        public TrainServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public TrainServiceClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public TrainServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public TrainServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public TrainServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public TrainServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+        public TrainServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
         }
         
         public string MessageBuilder(int id, int value, string MessageType) {
@@ -125,6 +145,22 @@ namespace TrainClient.TrainService {
         
         public System.Threading.Tasks.Task ErrorAsync() {
             return base.Channel.ErrorAsync();
+        }
+        
+        public void Subscribe() {
+            base.Channel.Subscribe();
+        }
+        
+        public System.Threading.Tasks.Task SubscribeAsync() {
+            return base.Channel.SubscribeAsync();
+        }
+        
+        public void UnSubscribe() {
+            base.Channel.UnSubscribe();
+        }
+        
+        public System.Threading.Tasks.Task UnSubscribeAsync() {
+            return base.Channel.UnSubscribeAsync();
         }
     }
 }

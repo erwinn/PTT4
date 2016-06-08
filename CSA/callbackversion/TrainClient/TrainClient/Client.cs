@@ -5,16 +5,21 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using TrainClient.TrainService;
-
+using System.Windows;
+using System.Windows.Forms;
+using System.Diagnostics;
+using System.Threading;
 namespace TrainClient
 {
-    public class Client
+    public class Client:TrainService.ITrainServiceCallback
     {
         private TrainServiceClient proxy;
 
         public Client()
         {
-            proxy = new TrainServiceClient();
+            ITrainServiceCallback callback = this;
+            InstanceContext context = new InstanceContext(callback);
+            proxy = new TrainServiceClient(context);
         }
 
         public void Refresh()
@@ -47,6 +52,21 @@ namespace TrainClient
         {
             return proxy.GetSensorValue(SensorId);
         }
-
+        public void OnEvent(string message)
+        {
+            Debug.WriteLine("callback");
+            Thread t = new Thread(() => MessageBox.Show(message));
+            t.Start();
+           
+            
+        }
+        public void Subscribe()
+        {
+            proxy.Subscribe();
+        }
+        public void Unsubscribe()
+        {
+            proxy.UnSubscribe();
+        }
     }
 }

@@ -42,6 +42,21 @@
   <wsdl:message name="ITrainService_Error_OutputMessage">
     <wsdl:part name="parameters" element="tns:ErrorResponse" />
   </wsdl:message>
+  <wsdl:message name="ITrainService_Subscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:Subscribe" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_Subscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_UnSubscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnSubscribe" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_UnSubscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnSubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrainService_OnEvent_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnEvent" />
+  </wsdl:message>
   <wsdl:portType name="ITrainService">
     <wsdl:operation name="MessageBuilder">
       <wsdl:input wsaw:Action="TrainService/ITrainService/MessageBuilder" message="tns:ITrainService_MessageBuilder_InputMessage" />
@@ -66,6 +81,17 @@
     <wsdl:operation name="Error">
       <wsdl:input wsaw:Action="TrainService/ITrainService/Error" message="tns:ITrainService_Error_InputMessage" />
       <wsdl:output wsaw:Action="TrainService/ITrainService/ErrorResponse" message="tns:ITrainService_Error_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Subscribe">
+      <wsdl:input wsaw:Action="TrainService/ITrainService/Subscribe" message="tns:ITrainService_Subscribe_InputMessage" />
+      <wsdl:output wsaw:Action="TrainService/ITrainService/SubscribeResponse" message="tns:ITrainService_Subscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnSubscribe">
+      <wsdl:input wsaw:Action="TrainService/ITrainService/UnSubscribe" message="tns:ITrainService_UnSubscribe_InputMessage" />
+      <wsdl:output wsaw:Action="TrainService/ITrainService/UnSubscribeResponse" message="tns:ITrainService_UnSubscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnEvent">
+      <wsdl:output wsaw:Action="TrainService/ITrainService/OnEvent" message="tns:ITrainService_OnEvent_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

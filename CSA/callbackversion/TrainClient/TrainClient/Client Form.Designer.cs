@@ -56,6 +56,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnReadSensor = new System.Windows.Forms.Button();
             this.LdrReadClock = new System.Windows.Forms.Timer(this.components);
+            this.subscribebtn = new System.Windows.Forms.Button();
+            this.unsubscribebtn = new System.Windows.Forms.Button();
             this.gbSwitchTrack.SuspendLayout();
             this.gbStopTrain.SuspendLayout();
             this.gbWriteSensorState.SuspendLayout();
@@ -328,11 +330,33 @@
             this.LdrReadClock.Interval = 1000;
             this.LdrReadClock.Tick += new System.EventHandler(this.LdrReadClock_Tick);
             // 
+            // subscribebtn
+            // 
+            this.subscribebtn.Location = new System.Drawing.Point(52, 324);
+            this.subscribebtn.Name = "subscribebtn";
+            this.subscribebtn.Size = new System.Drawing.Size(75, 23);
+            this.subscribebtn.TabIndex = 11;
+            this.subscribebtn.Text = "Subscribe";
+            this.subscribebtn.UseVisualStyleBackColor = true;
+            this.subscribebtn.Click += new System.EventHandler(this.subscribebtn_Click);
+            // 
+            // unsubscribebtn
+            // 
+            this.unsubscribebtn.Location = new System.Drawing.Point(146, 324);
+            this.unsubscribebtn.Name = "unsubscribebtn";
+            this.unsubscribebtn.Size = new System.Drawing.Size(87, 23);
+            this.unsubscribebtn.TabIndex = 12;
+            this.unsubscribebtn.Text = "Unsubscribe";
+            this.unsubscribebtn.UseVisualStyleBackColor = true;
+            this.unsubscribebtn.Click += new System.EventHandler(this.unsubscribebtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(887, 421);
+            this.Controls.Add(this.unsubscribebtn);
+            this.Controls.Add(this.subscribebtn);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbWriteSensorState);
             this.Controls.Add(this.gbStopTrain);
@@ -382,6 +406,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbDanger;
         internal System.Windows.Forms.Timer LdrReadClock;
+        private System.Windows.Forms.Button subscribebtn;
+        private System.Windows.Forms.Button unsubscribebtn;
     }
 }
 

@@ -11,10 +11,11 @@ namespace TrainService
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class TrainService : ITrainService
     {
-        SerialClass serialClass = new SerialClass();
-     
+        SerialClass serialClass;
+        List<ICallback> subscribers = new List<ICallback>();
         public TrainService()
         {
+            serialClass = new SerialClass(this);
             Debug.WriteLine("constructor TrainService() ");
             serialClass.Connect();
         }
@@ -64,6 +65,24 @@ namespace TrainService
                 value /= 26;
             }
             return result;
+        }
+
+        public void Subscribe()
+        {
+            subscribers.Add(OperationContext.Current.GetCallbackChannel<ICallback>());
+        }
+        public void UnSubscribe()
+        {
+            subscribers.Remove(OperationContext.Current.GetCallbackChannel<ICallback>());
+        }
+
+        public void Callback()
+        {
+            Debug.WriteLine("callback");
+            for (int i = 0; i < subscribers.Count; i++)
+            {
+                subscribers[i].OnEvent("danger detected");
+            }
         }
     }
 }

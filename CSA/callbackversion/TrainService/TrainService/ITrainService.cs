@@ -7,7 +7,7 @@ using System.Text;
 
 namespace TrainService
 {
-    [ServiceContract(Namespace = "TrainService")]
+    [ServiceContract(Namespace = "TrainService", CallbackContract = typeof(ICallback))]
     public interface ITrainService
     {
         [OperationContract]
@@ -27,5 +27,17 @@ namespace TrainService
 
         [OperationContract]
         void Error();
+
+        [OperationContract]
+        void Subscribe();
+        [OperationContract]
+        void UnSubscribe();
+
+    }
+    public interface ICallback
+    {
+        
+        [OperationContract(IsOneWay = true)]
+        void OnEvent(string message);
     }
 }

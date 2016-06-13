@@ -9,8 +9,11 @@ using System.Diagnostics;
 using System.Timers;
 namespace TrainService
 {
+
     public class SerialClass
     {
+        TrainService trainService;
+
         Timer timer1 = new Timer(750);
         Timer timer2 = new Timer(3000);
 
@@ -20,8 +23,9 @@ namespace TrainService
         SerialPort _serialPort = new SerialPort();
         string[] ports = SerialPort.GetPortNames();
 
-        public SerialClass()
+        public SerialClass(TrainService trainService)
         {
+            this.trainService = trainService;
             Debug.WriteLine("constructor SerialClass() ");
             timer1.Elapsed += timer1_Tick;
             timer1.Enabled = true;
@@ -81,12 +85,15 @@ namespace TrainService
             if (!blocktimer)
             {
                 sendCmd("datarequest");
+
                
             }
         }
         private void timer2_Tick(object sender, EventArgs e)
         {
             sendCmd("ArduinoStopTrainA");
+
+            trainService.Callback();
         }
      
         private void extractnumbers(string word)
@@ -109,8 +116,7 @@ namespace TrainService
             }
 
             
-            Debug.WriteLine("sensora"+ sensorarray[0]);
-            Debug.WriteLine("sensorb"+ sensorarray[0]);
+             
         }
         private void readarduino()
         {

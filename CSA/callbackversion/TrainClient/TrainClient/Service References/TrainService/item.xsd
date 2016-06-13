@@ -31,7 +31,7 @@
   <xs:element name="GetSensorValue">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="actuator" type="xs:int" />
+        <xs:element minOccurs="0" name="SensorID" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -96,7 +96,7 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="OnEvent">
+  <xs:element name="StoppedTrain">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />

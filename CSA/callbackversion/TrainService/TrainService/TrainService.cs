@@ -38,7 +38,6 @@ namespace TrainService
         {
             MessageSendArduino(MessageType + IntToLetters(id) + value);
             return MessageType + IntToLetters(id) + value;
-            //throw new NotImplementedException();
         }
 
         public bool MessageCollect()
@@ -81,7 +80,7 @@ namespace TrainService
             Debug.WriteLine("callback");
             for (int i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].OnEvent("danger detected");
+                subscribers[i].StoppedTrain("danger detected, train stopped");
             }
         }
     }

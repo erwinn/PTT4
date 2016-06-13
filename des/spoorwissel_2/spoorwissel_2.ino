@@ -2,11 +2,11 @@
 
 #include <SPI.h>
 #include <MCP2515.h>
-#define SPOORWISSEL_2 0x7d5
+#define SPOORWISSEL_ADRESS 0x7d5
 
 //define led pins
-#define TrackLeft 2
-#define TrackRight 3
+#define TrackLeft A0
+#define TrackRight A1
 
 int delaynr = 5;
 String s = "";
@@ -20,6 +20,10 @@ MCP2515 can;
 
 void setup()
 {
+  pinMode(TrackLeft, OUTPUT);
+  pinMode(TrackRight, OUTPUT);
+  digitalWrite(TrackLeft, LOW);
+  digitalWrite(TrackRight, LOW);
   SPI.setClockDivider(SPI_CLOCK_DIV8);
   if (can.initCAN(CAN_BAUD_100K) == 0)
   {
@@ -43,23 +47,41 @@ void setup()
     }
   }
 }
-
-
 void loop()
 {
   //receive can Messages
-  int i = can.receiveCANMessage(&msg, 1000);
-  if (i && msg.adrsValue == SPOORWISSEL_2)
-  {    
+  if (can.receiveCANMessage(&msg, 1000) && msg.adrsValue == SPOORWISSEL_ADRESS)
+  {
     State = (msg.data[0] > 0);
   }
-  delay(delaynr);
 
   //Update State Status
-  digitalWrite(TrackLeft, !State);
-  digitalWrite(TrackRight, State);
+  SwitchTrack(State);
+
+  //wait before reading again
+  delay(delaynr);
+
+
 }
 
+//Update Track Status
+int SwitchTrack(bool Track)
+{
+  if (Track)
+  {
+    digitalWrite(TrackLeft, LOW);
+    digitalWrite(TrackRight, HIGH);
+    digitalWrite(7, LOW);
+    digitalWrite(8, HIGH);
+  }
+  else
+  {
+    digitalWrite(TrackLeft, HIGH);
+    digitalWrite(TrackRight, LOW);
+    digitalWrite(7, HIGH);
+    digitalWrite(8, LOW);
+  }
+}
 int extractintfromstring(String msg)
 {
   String tempstring = "";

@@ -471,7 +471,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_ITrainService_OnEvent_output_policy">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_ITrainService_StoppedTrain_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -587,10 +587,10 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="OnEvent">
-      <soap12:operation soapAction="TrainService/ITrainService/OnEvent" style="document" />
+    <wsdl:operation name="StoppedTrain">
+      <soap12:operation soapAction="TrainService/ITrainService/StoppedTrain" style="document" />
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_ITrainService_OnEvent_output_policy" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_ITrainService_StoppedTrain_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

@@ -18,44 +18,31 @@ namespace TrainClient
         {
             InitializeComponent();
             client = new Client();
-            
+            cbSwitchState.Items.Add(Switch.Left);
+            cbSwitchState.Items.Add(Switch.Right);
+            cbSwitchState.SelectedIndex = 0;
+            cbSwitchID.SelectedIndex = 0;
         }
 
         private void btnSwitchTrack_Click(object sender, EventArgs e)
         {
-            client.SwitchTrack(Convert.ToInt32(tbTrain.Text), Convert.ToInt32(tbState));
+            client.SetSwitch(Convert.ToInt32(cbSwitchID.SelectedItem), (Switch)cbSwitchState.SelectedItem);
         }
 
         private void btnStopTrain_Click(object sender, EventArgs e)
         {
-            client.StopTrain(Convert.ToInt32(tbTrainID2.Text));
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnStartTrain_Click(object sender, EventArgs e)
-        {
-            client.Run(Convert.ToInt32(tbTrainID2.Text));
-        }
-
-        private void btnReadSensor_Click(object sender, EventArgs e)
-        {
-            tbSensorValue.Text = client.ReadSensorState(Convert.ToInt32(tbSensorId.Text)).ToString();
+            client.StopTrain();
         }
 
         private void btnWriteActuator_Click_1(object sender, EventArgs e)
         {
-            string message = client.WriteActuatorValue(Convert.ToInt32(tbActuatorId.Text), Convert.ToInt32(numSpeed.Text) * 10);
+            string message = client.SetTrainSpeed((int)numSpeed.Value);
             MessageBox.Show(message);
         }
 
         private void LdrReadClock_Tick(object sender, EventArgs e)
         {
             int valueLdr = client.ReadSensorState(1);
-            tbReadTimeLdr.Text = valueLdr.ToString();
 
             if (valueLdr == 1)
             {
@@ -65,6 +52,7 @@ namespace TrainClient
             {
                 tbDanger.Text = "safe";
             }
+            tbRPM.Text = client.ReadSensorState(2).ToString();
         }
 
         private void subscribebtn_Click(object sender, EventArgs e)

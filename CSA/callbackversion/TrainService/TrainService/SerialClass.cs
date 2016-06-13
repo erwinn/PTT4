@@ -69,7 +69,7 @@ namespace TrainService
                 return;
             }
             _serialPort.PortName = ports[0];
-            _serialPort.PortName = "COM7";
+            _serialPort.PortName = "COM8";
             _serialPort.Open();
             if (_serialPort.IsOpen){
                 Debug.WriteLine("open");
@@ -84,9 +84,7 @@ namespace TrainService
         {
             if (!blocktimer)
             {
-                sendCmd("datarequest");
-
-               
+                sendCmd("datarequest");               
             }
         }
         private void timer2_Tick(object sender, EventArgs e)
@@ -113,9 +111,7 @@ namespace TrainService
             {
                 sensorarray[1] = Convert.ToInt32(resultString);
                 
-            }
-
-            
+            }    
              
         }
         private void readarduino()
@@ -140,18 +136,3 @@ namespace TrainService
         }
     }
 }
-/*
-     int pos = -1;
-     int startpos = 0;
-     int timeslooped = 0;
-     while ((pos = word.IndexOf('\n', pos + 1)) != -1)
-     {
-         if (pos < word.Length)
-         {
-             string text = word.Substring(startpos, pos - startpos);
-             sensorvalue[timeslooped] = Convert.ToInt32(Regex.Match(text, @"\d+").Value);
-             startpos = pos;
-             Console.WriteLine(sensorvalue[timeslooped]);
-             timeslooped++;
-         }
-     }*/

@@ -54,8 +54,8 @@
   <wsdl:message name="ITrainService_UnSubscribe_OutputMessage">
     <wsdl:part name="parameters" element="tns:UnSubscribeResponse" />
   </wsdl:message>
-  <wsdl:message name="ITrainService_OnEvent_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:OnEvent" />
+  <wsdl:message name="ITrainService_StoppedTrain_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:StoppedTrain" />
   </wsdl:message>
   <wsdl:portType name="ITrainService">
     <wsdl:operation name="MessageBuilder">
@@ -90,8 +90,8 @@
       <wsdl:input wsaw:Action="TrainService/ITrainService/UnSubscribe" message="tns:ITrainService_UnSubscribe_InputMessage" />
       <wsdl:output wsaw:Action="TrainService/ITrainService/UnSubscribeResponse" message="tns:ITrainService_UnSubscribe_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="OnEvent">
-      <wsdl:output wsaw:Action="TrainService/ITrainService/OnEvent" message="tns:ITrainService_OnEvent_OutputCallbackMessage" />
+    <wsdl:operation name="StoppedTrain">
+      <wsdl:output wsaw:Action="TrainService/ITrainService/StoppedTrain" message="tns:ITrainService_StoppedTrain_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

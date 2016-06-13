@@ -103,7 +103,6 @@ void readCsharp()
       sendmsg.data[0] = extractintfromstring(s);
       sendmsg.data[1] = 1;
       sendcanmsg(SPOORWISSEL_1);
-      turnon();
     }
 
     //switch a railswitch B To Selected Track. 0 is left, 1 is right
@@ -162,12 +161,10 @@ void loop()
   if (i && readmsg.adrsValue == SENSOR_LASER)
   {
     LaserBlocked = readmsg.data[0];
-    turnon();
   }
   else if (i && readmsg.adrsValue == SENSOR_RPM)
   {
     CurrentRPM = readmsg.data[0];
-    turnon();
   }
   readCsharp();
 

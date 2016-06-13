@@ -8,6 +8,10 @@ using TrainClient.TrainService;
 
 namespace TrainClient
 {
+    public enum Switch
+    {
+        Left = 1, Right = 2
+    };
     public class Client
     {
         private TrainServiceClient proxy;
@@ -27,12 +31,6 @@ namespace TrainClient
             string message = proxy.MessageBuilder(trainId, 1, "ArduinoStartTrain");
         }
 
-        public bool SwitchTrack(int id, int state)
-        {
-            string message = proxy.MessageBuilder(id, state, "ArduinoSwitchTrack");
-            return true;
-        }
-
         public void StopTrain(int trainId)
         {
             string message = proxy.MessageBuilder(trainId, 0, "ArduinoStopTrain");
@@ -46,6 +44,10 @@ namespace TrainClient
         public int ReadSensorState(int SensorId)
         {
             return proxy.GetSensorValue(SensorId);
+        }
+        public void SetSwitch(int switchId, Switch switchstate)
+        {
+            proxy.MessageBuilder(switchId, (int)switchstate, "ArduinoSwitchTrack");
         }
 
     }

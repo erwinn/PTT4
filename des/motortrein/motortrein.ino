@@ -101,7 +101,6 @@ void loop()
   int i = can.receiveCANMessage(&msg, 1000);
   if (i && msg.adrsValue == TREIN_ADRESS)
   {
-    int treinid = msg.data[1];
     Setpoint = msg.data[0];
   }
   //MotorControl

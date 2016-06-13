@@ -12,8 +12,8 @@
 #define SENSOR_LASER 0x7d1            //Sensor for the laser unit
 #define SENSOR_RPM 0x7d2
 #define TREIN 0x7d3
-#define SPOORWEGOVERGANG 0x7d4
-#define SPOORWISSEL 0x7d5
+#define SPOORWISSEL_1 0x7d4
+#define SPOORWISSEL_2 0x7d5
 
 //global variable for reading incoming serial messages
 String s = "";
@@ -96,20 +96,24 @@ void readCsharp()
     {
       turnon();
     }
-    //switch a railswitch to track A
+
+    //switch a railswitch A To Selected Track. 0 is left, 1 is right
     else if (Contains(s, "ArduinoSwitchTrackA"))
     {
       sendmsg.data[0] = extractintfromstring(s);
       sendmsg.data[1] = 1;
-      sendcanmsg(SPOORWISSEL);
+      sendcanmsg(SPOORWISSEL_1);
+      turnon();
     }
-    //switch a railswitch to track B
+
+    //switch a railswitch B To Selected Track. 0 is left, 1 is right
     else if (Contains(s, "ArduinoSwitchTrackB"))
     {
       sendmsg.data[0] = extractintfromstring(s);
-      sendmsg.data[1] = 2;
-      sendcanmsg(SPOORWISSEL);
+      sendmsg.data[1] = 1;
+      sendcanmsg(SPOORWISSEL_2);
     }
+
     //Stop Train A
     else if (Contains(s, "ArduinoStopTrainA"))
     {
@@ -118,6 +122,8 @@ void readCsharp()
       sendcanmsg(TREIN);
 
     }
+
+    //Set the speed of the train
     else if (Contains(s, "ArduinoSetSpeedA"))
     {
 
@@ -168,19 +174,19 @@ void loop()
   //Display Sensor Data
   if (millis() - TimePassed > 500)
   {
-    TimePassed = millis();    
-    
-    //clear the data line:    
+    TimePassed = millis();
+
+    //clear the data line:
     lcd.selectLine(2);
     lcd.clearLine(2);
-    
+
     //print the Current RPM, add padding 0 if neccesary:
     lcd.print("RPM:             ");
     if (CurrentRPM < 100)  lcd.print(' ');
     if (CurrentRPM < 10)  lcd.print(' ');
     lcd.print(CurrentRPM);
 
-    
+
     //Print the data of the led array:
     lcd.print("Laser Array:       ");
     lcd.print(LaserBlocked);

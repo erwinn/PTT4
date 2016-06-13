@@ -33,10 +33,9 @@
             this.btnStopTrain = new System.Windows.Forms.Button();
             this.btnWriteActuator = new System.Windows.Forms.Button();
             this.gbSwitchTrack = new System.Windows.Forms.GroupBox();
-            this.lblState = new System.Windows.Forms.Label();
-            this.lblTrainID = new System.Windows.Forms.Label();
-            this.tbState = new System.Windows.Forms.TextBox();
-            this.tbTrain = new System.Windows.Forms.TextBox();
+            this.lblSwitchState = new System.Windows.Forms.Label();
+            this.lblSwitchID = new System.Windows.Forms.Label();
+            this.tbSwitchID = new System.Windows.Forms.TextBox();
             this.gbStopTrain = new System.Windows.Forms.GroupBox();
             this.btnStartTrain = new System.Windows.Forms.Button();
             this.lblTrainID2 = new System.Windows.Forms.Label();
@@ -56,6 +55,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnReadSensor = new System.Windows.Forms.Button();
             this.LdrReadClock = new System.Windows.Forms.Timer(this.components);
+            this.cbSwitchState = new System.Windows.Forms.ComboBox();
             this.gbSwitchTrack.SuspendLayout();
             this.gbStopTrain.SuspendLayout();
             this.gbWriteSensorState.SuspendLayout();
@@ -95,10 +95,10 @@
             // 
             // gbSwitchTrack
             // 
-            this.gbSwitchTrack.Controls.Add(this.lblState);
-            this.gbSwitchTrack.Controls.Add(this.lblTrainID);
-            this.gbSwitchTrack.Controls.Add(this.tbState);
-            this.gbSwitchTrack.Controls.Add(this.tbTrain);
+            this.gbSwitchTrack.Controls.Add(this.cbSwitchState);
+            this.gbSwitchTrack.Controls.Add(this.lblSwitchState);
+            this.gbSwitchTrack.Controls.Add(this.lblSwitchID);
+            this.gbSwitchTrack.Controls.Add(this.tbSwitchID);
             this.gbSwitchTrack.Controls.Add(this.btnSwitchTrack);
             this.gbSwitchTrack.Location = new System.Drawing.Point(42, 36);
             this.gbSwitchTrack.Name = "gbSwitchTrack";
@@ -107,37 +107,30 @@
             this.gbSwitchTrack.TabStop = false;
             this.gbSwitchTrack.Text = "Switch Track";
             // 
-            // lblState
+            // lblSwitchState
             // 
-            this.lblState.AutoSize = true;
-            this.lblState.Location = new System.Drawing.Point(10, 128);
-            this.lblState.Name = "lblState";
-            this.lblState.Size = new System.Drawing.Size(32, 13);
-            this.lblState.TabIndex = 6;
-            this.lblState.Text = "State";
+            this.lblSwitchState.AutoSize = true;
+            this.lblSwitchState.Location = new System.Drawing.Point(10, 128);
+            this.lblSwitchState.Name = "lblSwitchState";
+            this.lblSwitchState.Size = new System.Drawing.Size(32, 13);
+            this.lblSwitchState.TabIndex = 6;
+            this.lblSwitchState.Text = "State";
             // 
-            // lblTrainID
+            // lblSwitchID
             // 
-            this.lblTrainID.AutoSize = true;
-            this.lblTrainID.Location = new System.Drawing.Point(7, 52);
-            this.lblTrainID.Name = "lblTrainID";
-            this.lblTrainID.Size = new System.Drawing.Size(45, 13);
-            this.lblTrainID.TabIndex = 5;
-            this.lblTrainID.Text = "Train ID";
+            this.lblSwitchID.AutoSize = true;
+            this.lblSwitchID.Location = new System.Drawing.Point(7, 52);
+            this.lblSwitchID.Name = "lblSwitchID";
+            this.lblSwitchID.Size = new System.Drawing.Size(53, 13);
+            this.lblSwitchID.TabIndex = 5;
+            this.lblSwitchID.Text = "Switch ID";
             // 
-            // tbState
+            // tbSwitchID
             // 
-            this.tbState.Location = new System.Drawing.Point(6, 147);
-            this.tbState.Name = "tbState";
-            this.tbState.Size = new System.Drawing.Size(100, 20);
-            this.tbState.TabIndex = 4;
-            // 
-            // tbTrain
-            // 
-            this.tbTrain.Location = new System.Drawing.Point(6, 71);
-            this.tbTrain.Name = "tbTrain";
-            this.tbTrain.Size = new System.Drawing.Size(100, 20);
-            this.tbTrain.TabIndex = 3;
+            this.tbSwitchID.Location = new System.Drawing.Point(6, 71);
+            this.tbSwitchID.Name = "tbSwitchID";
+            this.tbSwitchID.Size = new System.Drawing.Size(100, 20);
+            this.tbSwitchID.TabIndex = 3;
             // 
             // gbStopTrain
             // 
@@ -328,6 +321,14 @@
             this.LdrReadClock.Interval = 1000;
             this.LdrReadClock.Tick += new System.EventHandler(this.LdrReadClock_Tick);
             // 
+            // cbSwitchState
+            // 
+            this.cbSwitchState.FormattingEnabled = true;
+            this.cbSwitchState.Location = new System.Drawing.Point(13, 145);
+            this.cbSwitchState.Name = "cbSwitchState";
+            this.cbSwitchState.Size = new System.Drawing.Size(121, 21);
+            this.cbSwitchState.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -361,10 +362,9 @@
         private System.Windows.Forms.GroupBox gbSwitchTrack;
         private System.Windows.Forms.GroupBox gbStopTrain;
         private System.Windows.Forms.GroupBox gbWriteSensorState;
-        private System.Windows.Forms.Label lblState;
-        private System.Windows.Forms.Label lblTrainID;
-        private System.Windows.Forms.TextBox tbState;
-        private System.Windows.Forms.TextBox tbTrain;
+        private System.Windows.Forms.Label lblSwitchState;
+        private System.Windows.Forms.Label lblSwitchID;
+        private System.Windows.Forms.TextBox tbSwitchID;
         private System.Windows.Forms.Label lblTrainID2;
         private System.Windows.Forms.TextBox tbTrainID2;
         private System.Windows.Forms.TextBox tbActuatorId;
@@ -382,6 +382,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbDanger;
         internal System.Windows.Forms.Timer LdrReadClock;
+        private System.Windows.Forms.ComboBox cbSwitchState;
     }
 }
 

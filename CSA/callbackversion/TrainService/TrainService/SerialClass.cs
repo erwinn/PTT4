@@ -69,7 +69,6 @@ namespace TrainService
                 return;
             }
             _serialPort.PortName = ports[0];
-            _serialPort.PortName = "COM8";
             _serialPort.Open();
             if (_serialPort.IsOpen){
                 Debug.WriteLine("open");

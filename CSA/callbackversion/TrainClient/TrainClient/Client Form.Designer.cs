@@ -33,22 +33,22 @@
             this.btnStopTrain = new System.Windows.Forms.Button();
             this.btnWriteActuator = new System.Windows.Forms.Button();
             this.gbSwitchTrack = new System.Windows.Forms.GroupBox();
+            this.cbSwitchState = new System.Windows.Forms.ComboBox();
+            this.cbSwitchID = new System.Windows.Forms.ComboBox();
             this.lblState = new System.Windows.Forms.Label();
             this.lblTrainID = new System.Windows.Forms.Label();
             this.gbTrain = new System.Windows.Forms.GroupBox();
-            this.numSpeed = new System.Windows.Forms.NumericUpDown();
+            this.tbRPM = new System.Windows.Forms.TextBox();
+            this.lblActualSpeed = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblRPM = new System.Windows.Forms.Label();
             this.lblState2 = new System.Windows.Forms.Label();
+            this.numSpeed = new System.Windows.Forms.NumericUpDown();
             this.tbDanger = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.LdrReadClock = new System.Windows.Forms.Timer(this.components);
             this.subscribebtn = new System.Windows.Forms.Button();
             this.unsubscribebtn = new System.Windows.Forms.Button();
-            this.cbSwitchID = new System.Windows.Forms.ComboBox();
-            this.cbSwitchState = new System.Windows.Forms.ComboBox();
-            this.lblRPM = new System.Windows.Forms.Label();
-            this.lblActualSpeed = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tbRPM = new System.Windows.Forms.TextBox();
             this.gbLaserArray = new System.Windows.Forms.GroupBox();
             this.gbSwitchTrack.SuspendLayout();
             this.gbTrain.SuspendLayout();
@@ -100,6 +100,27 @@
             this.gbSwitchTrack.TabStop = false;
             this.gbSwitchTrack.Text = "Switch Track";
             // 
+            // cbSwitchState
+            // 
+            this.cbSwitchState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSwitchState.FormattingEnabled = true;
+            this.cbSwitchState.Location = new System.Drawing.Point(10, 85);
+            this.cbSwitchState.Name = "cbSwitchState";
+            this.cbSwitchState.Size = new System.Drawing.Size(121, 21);
+            this.cbSwitchState.TabIndex = 8;
+            // 
+            // cbSwitchID
+            // 
+            this.cbSwitchID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSwitchID.FormattingEnabled = true;
+            this.cbSwitchID.Items.AddRange(new object[] {
+            "1",
+            "2"});
+            this.cbSwitchID.Location = new System.Drawing.Point(10, 43);
+            this.cbSwitchID.Name = "cbSwitchID";
+            this.cbSwitchID.Size = new System.Drawing.Size(121, 21);
+            this.cbSwitchID.TabIndex = 7;
+            // 
             // lblState
             // 
             this.lblState.AutoSize = true;
@@ -135,6 +156,50 @@
             this.gbTrain.TabStop = false;
             this.gbTrain.Text = "Train";
             // 
+            // tbRPM
+            // 
+            this.tbRPM.Location = new System.Drawing.Point(97, 62);
+            this.tbRPM.Name = "tbRPM";
+            this.tbRPM.ReadOnly = true;
+            this.tbRPM.Size = new System.Drawing.Size(59, 20);
+            this.tbRPM.TabIndex = 12;
+            // 
+            // lblActualSpeed
+            // 
+            this.lblActualSpeed.AutoSize = true;
+            this.lblActualSpeed.Location = new System.Drawing.Point(16, 65);
+            this.lblActualSpeed.Name = "lblActualSpeed";
+            this.lblActualSpeed.Size = new System.Drawing.Size(74, 13);
+            this.lblActualSpeed.TabIndex = 11;
+            this.lblActualSpeed.Text = "Actual Speed:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(162, 65);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(31, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "RPM";
+            // 
+            // lblRPM
+            // 
+            this.lblRPM.AutoSize = true;
+            this.lblRPM.Location = new System.Drawing.Point(162, 27);
+            this.lblRPM.Name = "lblRPM";
+            this.lblRPM.Size = new System.Drawing.Size(31, 13);
+            this.lblRPM.TabIndex = 10;
+            this.lblRPM.Text = "RPM";
+            // 
+            // lblState2
+            // 
+            this.lblState2.AutoSize = true;
+            this.lblState2.Location = new System.Drawing.Point(16, 27);
+            this.lblState2.Name = "lblState2";
+            this.lblState2.Size = new System.Drawing.Size(41, 13);
+            this.lblState2.TabIndex = 5;
+            this.lblState2.Text = "Speed:";
+            // 
             // numSpeed
             // 
             this.numSpeed.Location = new System.Drawing.Point(63, 25);
@@ -156,15 +221,6 @@
             0,
             0,
             0});
-            // 
-            // lblState2
-            // 
-            this.lblState2.AutoSize = true;
-            this.lblState2.Location = new System.Drawing.Point(16, 27);
-            this.lblState2.Name = "lblState2";
-            this.lblState2.Size = new System.Drawing.Size(41, 13);
-            this.lblState2.TabIndex = 5;
-            this.lblState2.Text = "Speed:";
             // 
             // tbDanger
             // 
@@ -209,62 +265,6 @@
             this.unsubscribebtn.Text = "Unsubscribe";
             this.unsubscribebtn.UseVisualStyleBackColor = true;
             this.unsubscribebtn.Click += new System.EventHandler(this.unsubscribebtn_Click);
-            // 
-            // cbSwitchID
-            // 
-            this.cbSwitchID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSwitchID.FormattingEnabled = true;
-            this.cbSwitchID.Items.AddRange(new object[] {
-            "1",
-            "2"});
-            this.cbSwitchID.Location = new System.Drawing.Point(10, 43);
-            this.cbSwitchID.Name = "cbSwitchID";
-            this.cbSwitchID.Size = new System.Drawing.Size(121, 21);
-            this.cbSwitchID.TabIndex = 7;
-            // 
-            // cbSwitchState
-            // 
-            this.cbSwitchState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSwitchState.FormattingEnabled = true;
-            this.cbSwitchState.Location = new System.Drawing.Point(10, 85);
-            this.cbSwitchState.Name = "cbSwitchState";
-            this.cbSwitchState.Size = new System.Drawing.Size(121, 21);
-            this.cbSwitchState.TabIndex = 8;
-            // 
-            // lblRPM
-            // 
-            this.lblRPM.AutoSize = true;
-            this.lblRPM.Location = new System.Drawing.Point(162, 27);
-            this.lblRPM.Name = "lblRPM";
-            this.lblRPM.Size = new System.Drawing.Size(31, 13);
-            this.lblRPM.TabIndex = 10;
-            this.lblRPM.Text = "RPM";
-            // 
-            // lblActualSpeed
-            // 
-            this.lblActualSpeed.AutoSize = true;
-            this.lblActualSpeed.Location = new System.Drawing.Point(16, 65);
-            this.lblActualSpeed.Name = "lblActualSpeed";
-            this.lblActualSpeed.Size = new System.Drawing.Size(74, 13);
-            this.lblActualSpeed.TabIndex = 11;
-            this.lblActualSpeed.Text = "Actual Speed:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(162, 65);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "RPM";
-            // 
-            // tbRPM
-            // 
-            this.tbRPM.Location = new System.Drawing.Point(97, 62);
-            this.tbRPM.Name = "tbRPM";
-            this.tbRPM.ReadOnly = true;
-            this.tbRPM.Size = new System.Drawing.Size(59, 20);
-            this.tbRPM.TabIndex = 12;
             // 
             // gbLaserArray
             // 

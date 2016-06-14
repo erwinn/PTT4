@@ -68,7 +68,5 @@ namespace TrainClient
             subscribebtn.Enabled = true;
             client.Unsubscribe();    
         }
-
-        
     }
 }

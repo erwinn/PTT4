@@ -5,6 +5,9 @@
 
 //Adress of this arduino
 #define SENSOR_ADRESS 0x7d1
+#define SEIN_RICHTING 0x7d4
+#define SEIN_OBJECT 0x7d5
+#define TREIN 0x7d3
 
 //define Pins
 #define LDR1 A0
@@ -15,8 +18,11 @@
 bool Block1;
 bool Block2;
 
+bool IsAtEnd = false;
 //for measuring time in the code
 long TimePassed;
+long SensorDelay;
+long IsAtEndTimer;
 
 //Define SerialLCD Display
 serLCD lcd(LCDPin);
@@ -78,12 +84,38 @@ void loop() {
     lcd.print("SENSOR1: ");
     if (Block1) lcd.print("    Blocked");
     else        lcd.print("Not Blocked");
-    
+
     //Print the data of sensor 2:
     lcd.print("SENSOR2: ");
     if (Block2) lcd.print("    Blocked");
     else        lcd.print("Not Blocked");
     SendMessage(Block1 || Block2, SENSOR_ADRESS);
+    if (Block1)
+    {
+      SensorDelay = millis();
+      SendMessage(1, SEIN_RICHTING);
+      SendMessage(1, SEIN_OBJECT);
+    }
+    if (Block2)
+    {
+      SensorDelay = millis();
+      SendMessage(0, SEIN_RICHTING);
+      SendMessage(1, SEIN_OBJECT);
+      IsAtEnd = true;
+      IsAtEndTimer = millis();
+    }
+    if (IsAtEnd && (millis() - IsAtEndTimer) > 2000)
+    {
+      //sendmsg.data[0] = 0;
+      //sendmsg.data[1] = 1;
+      SendMessage(0, TREIN);
+      IsAtEnd = false;
+    }
+  }
+  if (millis() - SensorDelay > 5000)
+  {
+    SensorDelay = millis();
+    SendMessage(0, SEIN_OBJECT);
   }
 }
 
@@ -94,5 +126,5 @@ void SendMessage(int value, int adress)
   msg.rtr = false;
   msg.dataLength = 1;
   msg.data[0] = value;
-  can.transmitCANMessage(msg, 1000);  
+  can.transmitCANMessage(msg, 1000);
 }

@@ -11,9 +11,9 @@ using System.Diagnostics;
 using System.Threading;
 namespace TrainClient
 {
-    public enum Switch
+    public enum SIGN
     {
-        Left = 0, Right = 1
+        GO = 0, STOP = 1
     };
     public class Client:TrainService.ITrainServiceCallback
     {
@@ -34,9 +34,9 @@ namespace TrainClient
         /// </summary>
         /// <param name="switchId"></param>
         /// <param name="switchstate"></param>
-        public void SetSwitch(int switchId, Switch switchstate)
+        public void SetSwitch(SIGN switchstate)
         {
-            proxy.MessageBuilder(switchId, (int)switchstate, "ArduinoSwitchTrack");
+            proxy.MessageBuilder(1, (int)switchstate, "ArduinoSwitchSign");
         }
 
         /// <summary>

@@ -18,15 +18,14 @@ namespace TrainClient
         {
             InitializeComponent();
             client = new Client();
-            cbSwitchState.Items.Add(Switch.Left);
-            cbSwitchState.Items.Add(Switch.Right);
+            cbSwitchState.Items.Add(SIGN.GO);
+            cbSwitchState.Items.Add(SIGN.STOP);
             cbSwitchState.SelectedIndex = 0;
-            cbSwitchID.SelectedIndex = 0;
         }
 
         private void btnSwitchTrack_Click(object sender, EventArgs e)
         {
-            client.SetSwitch(Convert.ToInt32(cbSwitchID.SelectedItem), (Switch)cbSwitchState.SelectedItem);
+            client.SetSwitch((SIGN)cbSwitchState.SelectedItem);
         }
 
         private void btnStopTrain_Click(object sender, EventArgs e)

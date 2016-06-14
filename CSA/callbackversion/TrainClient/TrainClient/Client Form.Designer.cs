@@ -34,9 +34,7 @@
             this.btnWriteActuator = new System.Windows.Forms.Button();
             this.gbSwitchTrack = new System.Windows.Forms.GroupBox();
             this.cbSwitchState = new System.Windows.Forms.ComboBox();
-            this.cbSwitchID = new System.Windows.Forms.ComboBox();
             this.lblState = new System.Windows.Forms.Label();
-            this.lblTrainID = new System.Windows.Forms.Label();
             this.gbTrain = new System.Windows.Forms.GroupBox();
             this.tbRPM = new System.Windows.Forms.TextBox();
             this.lblActualSpeed = new System.Windows.Forms.Label();
@@ -89,16 +87,15 @@
             // gbSwitchTrack
             // 
             this.gbSwitchTrack.Controls.Add(this.cbSwitchState);
-            this.gbSwitchTrack.Controls.Add(this.cbSwitchID);
             this.gbSwitchTrack.Controls.Add(this.lblState);
-            this.gbSwitchTrack.Controls.Add(this.lblTrainID);
             this.gbSwitchTrack.Controls.Add(this.btnSwitchTrack);
-            this.gbSwitchTrack.Location = new System.Drawing.Point(12, 12);
+            this.gbSwitchTrack.Location = new System.Drawing.Point(267, 22);
             this.gbSwitchTrack.Name = "gbSwitchTrack";
             this.gbSwitchTrack.Size = new System.Drawing.Size(145, 179);
             this.gbSwitchTrack.TabIndex = 5;
             this.gbSwitchTrack.TabStop = false;
             this.gbSwitchTrack.Text = "Switch Track";
+            this.gbSwitchTrack.Visible = false;
             // 
             // cbSwitchState
             // 
@@ -109,18 +106,6 @@
             this.cbSwitchState.Size = new System.Drawing.Size(121, 21);
             this.cbSwitchState.TabIndex = 8;
             // 
-            // cbSwitchID
-            // 
-            this.cbSwitchID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSwitchID.FormattingEnabled = true;
-            this.cbSwitchID.Items.AddRange(new object[] {
-            "1",
-            "2"});
-            this.cbSwitchID.Location = new System.Drawing.Point(10, 43);
-            this.cbSwitchID.Name = "cbSwitchID";
-            this.cbSwitchID.Size = new System.Drawing.Size(121, 21);
-            this.cbSwitchID.TabIndex = 7;
-            // 
             // lblState
             // 
             this.lblState.AutoSize = true;
@@ -129,15 +114,6 @@
             this.lblState.Size = new System.Drawing.Size(32, 13);
             this.lblState.TabIndex = 6;
             this.lblState.Text = "State";
-            // 
-            // lblTrainID
-            // 
-            this.lblTrainID.AutoSize = true;
-            this.lblTrainID.Location = new System.Drawing.Point(7, 27);
-            this.lblTrainID.Name = "lblTrainID";
-            this.lblTrainID.Size = new System.Drawing.Size(53, 13);
-            this.lblTrainID.TabIndex = 5;
-            this.lblTrainID.Text = "Switch ID";
             // 
             // gbTrain
             // 
@@ -149,7 +125,7 @@
             this.gbTrain.Controls.Add(this.lblState2);
             this.gbTrain.Controls.Add(this.numSpeed);
             this.gbTrain.Controls.Add(this.btnStopTrain);
-            this.gbTrain.Location = new System.Drawing.Point(173, 12);
+            this.gbTrain.Location = new System.Drawing.Point(12, 12);
             this.gbTrain.Name = "gbTrain";
             this.gbTrain.Size = new System.Drawing.Size(249, 157);
             this.gbTrain.TabIndex = 6;
@@ -247,7 +223,7 @@
             // 
             // subscribebtn
             // 
-            this.subscribebtn.Location = new System.Drawing.Point(254, 196);
+            this.subscribebtn.Location = new System.Drawing.Point(166, 206);
             this.subscribebtn.Name = "subscribebtn";
             this.subscribebtn.Size = new System.Drawing.Size(87, 23);
             this.subscribebtn.TabIndex = 11;
@@ -258,7 +234,7 @@
             // unsubscribebtn
             // 
             this.unsubscribebtn.Enabled = false;
-            this.unsubscribebtn.Location = new System.Drawing.Point(254, 225);
+            this.unsubscribebtn.Location = new System.Drawing.Point(166, 235);
             this.unsubscribebtn.Name = "unsubscribebtn";
             this.unsubscribebtn.Size = new System.Drawing.Size(87, 23);
             this.unsubscribebtn.TabIndex = 12;
@@ -308,7 +284,6 @@
         private System.Windows.Forms.GroupBox gbSwitchTrack;
         private System.Windows.Forms.GroupBox gbTrain;
         private System.Windows.Forms.Label lblState;
-        private System.Windows.Forms.Label lblTrainID;
         private System.Windows.Forms.Label lblState2;
         private System.Windows.Forms.NumericUpDown numSpeed;
         private System.Windows.Forms.Label label3;
@@ -317,7 +292,6 @@
         private System.Windows.Forms.Button subscribebtn;
         private System.Windows.Forms.Button unsubscribebtn;
         private System.Windows.Forms.ComboBox cbSwitchState;
-        private System.Windows.Forms.ComboBox cbSwitchID;
         private System.Windows.Forms.Label lblActualSpeed;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblRPM;

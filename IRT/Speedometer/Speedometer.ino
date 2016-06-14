@@ -3,8 +3,8 @@
 #include <serLCD.h>
 
 //Define used Pins
-#define MotorPWR 3
-#define MotorDir 12
+#define MotorPWR 11
+#define MotorDir 13
 #define SpeedSensorPin A5
 #define LCDPin 6
 

@@ -15,9 +15,6 @@ MCP2515 can;
 #define MotorDir 12
 #define SpeedSensorPin A5
 #define LCDPin 6
-#define MotorBDir 13
-#define MotorBPWR 11
-#define MotorBBrake 8
 
 //Motor Constants
 #define MotorPowerMin 30      //the motor does not run under this value, it will stop
@@ -67,9 +64,6 @@ void setup()
 
   //set the motor in the correct Direction
   digitalWrite(MotorDir, LOW);
-  digitalWrite(MotorBDir, LOW);
-  digitalWrite(MotorBPWR, LOW);
-  digitalWrite(MotorBBrake, LOW);
 
   //Turn the PID Controller ON:
   myPID.SetMode(AUTOMATIC);

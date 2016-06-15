@@ -12,8 +12,8 @@
 #define SENSOR_LASER 0x7d1            //Sensor for the laser unit
 #define SENSOR_RPM 0x7d2
 #define TREIN 0x7d3
-#define SPOORWISSEL_1 0x7d4
-#define SPOORWISSEL_2 0x7d5
+#define SPOORLIGHT_1 0x7d4
+#define SPOORLIGHT_2 0x7d5
 
 //global variable for reading incoming serial messages
 String s = "";
@@ -98,19 +98,19 @@ void readCsharp()
     }
 
     //switch a railswitch A To Selected Track. 0 is left, 1 is right
-    else if (Contains(s, "ArduinoSwitchTrackA"))
+    else if (Contains(s, "ArduinoSwitchSignA"))
     {
       sendmsg.data[0] = extractintfromstring(s);
       sendmsg.data[1] = 1;
-      sendcanmsg(SPOORWISSEL_1);
+      sendcanmsg(SPOORLIGHT_1);
     }
 
     //switch a railswitch B To Selected Track. 0 is left, 1 is right
-    else if (Contains(s, "ArduinoSwitchTrackB"))
+    else if (Contains(s, "ArduinoSwitchSignB"))
     {
       sendmsg.data[0] = extractintfromstring(s);
       sendmsg.data[1] = 1;
-      sendcanmsg(SPOORWISSEL_2);
+      sendcanmsg(SPOORLIGHT_2);
     }
 
     //Stop Train A

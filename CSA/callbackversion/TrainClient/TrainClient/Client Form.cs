@@ -35,8 +35,15 @@ namespace TrainClient
 
         private void btnWriteActuator_Click_1(object sender, EventArgs e)
         {
-            string message = client.SetTrainSpeed((int)numSpeed.Value);
-            MessageBox.Show(message);
+            try
+            {
+                string message = client.SetTrainSpeed((int)numSpeed.Value);
+                MessageBox.Show(message);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Couldn't write to server!");
+            }
         }
 
         private void LdrReadClock_Tick(object sender, EventArgs e)
@@ -45,11 +52,11 @@ namespace TrainClient
 
             if (valueLdr == 1)
             {
-                tbDanger.Text = "Danger!";
+                tbDanger.Text = "DANGER!";
             }
             else if (valueLdr == 0)
             {
-                tbDanger.Text = "safe";
+                tbDanger.Text = "Safe";
             }
             tbRPM.Text = client.ReadSensorState(2).ToString();
         }

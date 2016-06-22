@@ -51,7 +51,7 @@ namespace TrainClient
         /// Return
         /// </summary>
         /// <param name="value">sets the speed of the motor to the desired number</param>
-        /// <returns>The string that is sended to the arduino</returns>
+        /// <returns>The string that is sent to the arduino</returns>
         public string SetTrainSpeed(int value)
         {
             if (value < 50 || value > 250)
@@ -83,7 +83,7 @@ namespace TrainClient
         }
 
         /// <summary>
-        /// Subscribes to the event list in the server, doing this will enable you to recieve events from the server
+        /// Subscribes to the event list in the server, doing this will enable you to receive events from the server
         /// </summary>
         public void Subscribe()
         {
@@ -91,7 +91,7 @@ namespace TrainClient
         }
 
         /// <summary>
-        /// Unsubscribes to the event list in the server, doing this will disable you to recieve events from the server 
+        /// Unsubscribes to the event list in the server, doing this will disable you to receive events from the server 
         /// </summary>
         public void Unsubscribe()
         {

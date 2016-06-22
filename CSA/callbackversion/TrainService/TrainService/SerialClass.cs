@@ -19,7 +19,7 @@ namespace TrainService
 
         int[] sensorarray = new int[2];
         bool blocktimer = false;
-        
+
         SerialPort _serialPort = new SerialPort();
         string[] ports = SerialPort.GetPortNames();
 
@@ -34,17 +34,23 @@ namespace TrainService
             _serialPort.BaudRate = 9600;
             _serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
         }
-        
-       
-        public int[] getSensorArray(){return sensorarray;}
-      
+
+
+        public int[] getSensorArray()
+        {
+            return sensorarray;
+        }
+
 
         public bool sendCmd(String cmd)
         {
-            try{
-                if (_serialPort!=null){
-                    if (_serialPort.IsOpen){
-                   
+            try
+            {
+                if (_serialPort != null)
+                {
+                    if (_serialPort.IsOpen)
+                    {
+
                         blocktimer = true;
                         _serialPort.Write(cmd);
                         blocktimer = false;
@@ -52,51 +58,57 @@ namespace TrainService
                     }
                 }
             }
-            catch (NullReferenceException){
+            catch (NullReferenceException)
+            {
                 throw new NullReferenceException();
-    
             }
             return false;
         }
-        private void DataReceivedHandler(object sender,SerialDataReceivedEventArgs e ){
-         
+
+        private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+        {
             readarduino();
         }
+
         public void Connect()
         {
             string[] ports = SerialPort.GetPortNames();
-            if (ports == null || ports.Length==0){
+            if (ports == null || ports.Length == 0)
+            {
                 return;
             }
             _serialPort.PortName = ports[0];
             _serialPort.Open();
-            if (_serialPort.IsOpen){
+            if (_serialPort.IsOpen)
+            {
                 Debug.WriteLine("open");
                 sendCmd("datarequest");
                 timer1.Enabled = true;
             }
-            else{
+            else
+            {
                 Debug.WriteLine("failed");
             }
         }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (!blocktimer)
             {
-                sendCmd("datarequest");               
+                sendCmd("datarequest");
             }
         }
+
         private void timer2_Tick(object sender, EventArgs e)
         {
             sendCmd("ArduinoStopTrainA");
 
             trainService.Callback();
         }
-     
+
         private void extractnumbers(string word)
         {
-              
-            if(!word.Any(c => char.IsDigit(c)))
+            if (!word.Any(c => char.IsDigit(c)))
             {
                 return;
             }
@@ -104,34 +116,33 @@ namespace TrainService
             if (word.Contains("datatransmitterA"))
             {
                 sensorarray[0] = Convert.ToInt32(resultString);
-                
+
             }
             else if (word.Contains("datatransmitterB"))
             {
                 sensorarray[1] = Convert.ToInt32(resultString);
-                
-            }    
-             
+            }
         }
+
         private void readarduino()
         {
             if (_serialPort.IsOpen)
+            {
+                if (_serialPort.BytesToRead > 0)
                 {
-                    if (_serialPort.BytesToRead > 0)
-                    {
-                        string text = _serialPort.ReadLine();
-                        extractnumbers(text);
+                    string text = _serialPort.ReadLine();
+                    extractnumbers(text);
 
-                        if (sensorarray[0]==1||sensorarray[1]==1)
-                        {
-                            timer2.Enabled = true;
-                        }
-                        else
-                        {
-                            timer2.Enabled = false;
-                        }
+                    if (sensorarray[0] == 1 || sensorarray[1] == 1)
+                    {
+                        timer2.Enabled = true;
+                    }
+                    else
+                    {
+                        timer2.Enabled = false;
                     }
                 }
+            }
         }
     }
 }

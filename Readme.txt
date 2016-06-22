@@ -1,2 +1,2 @@
 PTT4 Main folder
-het veilig en efficient maken van de spoorwegen en de omgeving ervan
+De spoorwegen veiliger maken en het efficienter laden en lossen van goederentreinen.

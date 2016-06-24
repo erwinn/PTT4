@@ -50,14 +50,15 @@ namespace TrainClient
 
         private void LdrReadClock_Tick(object sender, EventArgs e)
         {
-            int valueLdr = client.ReadSensorState(1);
-
-            if(!client.connectionState)
+            if (!client.connectionState)
             {
                 tbDanger.Text = "No connection";
                 return;
             }
             lblNoConnection.Visible = false;
+
+            int valueLdr = client.ReadSensorState(1);
+
             if (valueLdr == 1)
             {
                 tbDanger.Text = "DANGER!";

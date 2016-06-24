@@ -49,7 +49,7 @@ namespace TrainClient
         }
 
         /// <summary>
-        /// Stops the train  
+        /// Stops the train when there is a connection 
         /// </summary>
         public void StopTrain()
         {
@@ -64,7 +64,7 @@ namespace TrainClient
         }
 
         /// <summary>
-        /// Return
+        /// Sets trainspeed throws exception when there's no connection
         /// </summary>
         /// <param name="value">sets the speed of the motor to the desired number</param>
         /// <returns>The string that is sent to the arduino</returns>
@@ -90,7 +90,7 @@ namespace TrainClient
         /// Reads Sensor data send by the can network
         /// </summary>
         /// <param name="SensorId"></param>
-        /// <returns>the data</returns>
+        /// <returns>the data or -1 on error</returns>
         public int ReadSensorState(int SensorId)
         {
             if(!connectionState)
@@ -117,6 +117,7 @@ namespace TrainClient
         /// <summary>
         /// Subscribes to the event list in the server, doing this will enable you to receive events from the server
         /// </summary>
+        /// <returns>false on error, true on success</returns>
         public bool Subscribe()
         {
             if (!connectionState)
@@ -134,6 +135,7 @@ namespace TrainClient
         /// <summary>
         /// Unsubscribes to the event list in the server, doing this will disable you to receive events from the server 
         /// </summary>
+        /// <returns>false on error, true on success</returns>
         public bool Unsubscribe()
         {
             if (!connectionState)
@@ -148,6 +150,9 @@ namespace TrainClient
             }
         }
 
+        /// <summary>
+        /// Tests connection between client and server
+        /// </summary>
         private void TestConnection()
         {
             try

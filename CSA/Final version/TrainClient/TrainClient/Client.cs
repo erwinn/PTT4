@@ -1,23 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using TrainClient.TrainService;
-using System.Windows;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
+using System.Net.NetworkInformation;
+
 namespace TrainClient
 {
     public enum SIGN
     {
-        GO = 0, STOP = 1
+        GO = 0,
+        STOP = 1
     };
-    public class Client:TrainService.ITrainServiceCallback
+
+    public class Client : ITrainServiceCallback
     {
         private TrainServiceClient proxy;
+        public bool connectionState;
 
         /// <summary>
         /// Constructor for the Client class
@@ -27,6 +27,8 @@ namespace TrainClient
             ITrainServiceCallback callback = this;
             InstanceContext context = new InstanceContext(callback);
             proxy = new TrainServiceClient(context);
+            connectionState = false;
+            TestConnection();
         }
 
         /// <summary>
@@ -36,7 +38,14 @@ namespace TrainClient
         /// <param name="switchstate"></param>
         public void SetSwitch(SIGN switchstate)
         {
-            proxy.MessageBuilder(1, (int)switchstate, "ArduinoSwitchSign");
+            if (!connectionState)
+            {
+                TestConnection();
+            }
+            else
+            {
+                proxy.MessageBuilder(1, (int)switchstate, "ArduinoSwitchSign");
+            }
         }
 
         /// <summary>
@@ -44,7 +53,14 @@ namespace TrainClient
         /// </summary>
         public void StopTrain()
         {
-            string message = proxy.MessageBuilder(1, 0, "ArduinoStopTrain");
+            if (!connectionState)
+            {
+                TestConnection();
+            }
+            else
+            {
+                string message = proxy.MessageBuilder(1, 0, "ArduinoStopTrain");
+            }
         }
 
         /// <summary>
@@ -58,7 +74,16 @@ namespace TrainClient
             {
                 throw new ArgumentOutOfRangeException("value");
             }
-            return proxy.MessageBuilder(1, value, "ArduinoSetSpeed");
+
+            if (!connectionState)
+            {
+                TestConnection();
+                throw new CommunicationException("connection");
+            }
+            else
+            {
+                return proxy.MessageBuilder(1, value, "ArduinoSetSpeed");
+            }
         }
 
         /// <summary>
@@ -68,7 +93,15 @@ namespace TrainClient
         /// <returns>the data</returns>
         public int ReadSensorState(int SensorId)
         {
-            return proxy.GetSensorValue(SensorId);
+            if(!connectionState)
+            {
+                TestConnection();
+                return -1;
+            }
+            else
+            { 
+                return proxy.GetSensorValue(SensorId);
+            }
         }
 
         /// <summary>
@@ -77,7 +110,6 @@ namespace TrainClient
         /// <param name="message">Message containing the error</param>
         public void StoppedTrain(string message)
         {
-            Debug.WriteLine("callback");
             Thread t = new Thread(() => MessageBox.Show(message));
             t.Start();
         }
@@ -85,17 +117,52 @@ namespace TrainClient
         /// <summary>
         /// Subscribes to the event list in the server, doing this will enable you to receive events from the server
         /// </summary>
-        public void Subscribe()
+        public bool Subscribe()
         {
-            proxy.Subscribe();
+            if (!connectionState)
+            {
+                TestConnection();
+                return false;
+            }
+            else
+            {
+                proxy.Subscribe();
+                return true;
+            }
         }
 
         /// <summary>
         /// Unsubscribes to the event list in the server, doing this will disable you to receive events from the server 
         /// </summary>
-        public void Unsubscribe()
+        public bool Unsubscribe()
         {
-            proxy.UnSubscribe();
+            if (!connectionState)
+            {
+                TestConnection();
+                return false;
+            }
+            else
+            {
+                proxy.UnSubscribe();
+                return true;
+            }
+        }
+
+        private void TestConnection()
+        {
+            try
+            {
+                Ping p = new Ping();
+                PingReply reply = p.Send(proxy.Endpoint.Address.ToString());
+                if (reply.Status == IPStatus.Success)
+                {
+                    connectionState = true;
+                }
+            }
+            catch (PingException)
+            {
+                Debug.WriteLine("There's no connection to te server");
+            }
         }
     }
 }

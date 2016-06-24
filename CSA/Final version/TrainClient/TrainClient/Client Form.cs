@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace TrainClient
@@ -21,6 +15,10 @@ namespace TrainClient
             cbSwitchState.Items.Add(SIGN.GO);
             cbSwitchState.Items.Add(SIGN.STOP);
             cbSwitchState.SelectedIndex = 0;
+            if(client.connectionState)
+            {
+                lblNoConnection.Visible = false;
+            }
         }
 
         private void btnSwitchTrack_Click(object sender, EventArgs e)
@@ -44,12 +42,22 @@ namespace TrainClient
             {
                 MessageBox.Show("Couldn't write to server!");
             }
-        }
+            catch (System.ServiceModel.CommunicationException)
+            {
+                lblNoConnection.Visible = true;
+            }
+}
 
         private void LdrReadClock_Tick(object sender, EventArgs e)
         {
             int valueLdr = client.ReadSensorState(1);
 
+            if(!client.connectionState)
+            {
+                tbDanger.Text = "No connection";
+                return;
+            }
+            lblNoConnection.Visible = false;
             if (valueLdr == 1)
             {
                 tbDanger.Text = "DANGER!";
@@ -63,16 +71,22 @@ namespace TrainClient
 
         private void subscribebtn_Click(object sender, EventArgs e)
         {
-            unsubscribebtn.Enabled = true;
-            subscribebtn.Enabled = false;
-            client.Subscribe();    
+            if(client.Subscribe())
+            {
+                lblNoConnection.Visible = false;
+                subscribebtn.Enabled = false;
+                unsubscribebtn.Enabled = true;
+            }    
         }
 
         private void unsubscribebtn_Click(object sender, EventArgs e)
         {
-            unsubscribebtn.Enabled = false;
-            subscribebtn.Enabled = true;
-            client.Unsubscribe();    
+            if(client.Unsubscribe())
+            {
+                lblNoConnection.Visible = false;
+                unsubscribebtn.Enabled = false;
+                subscribebtn.Enabled = true;
+            }   
         }
     }
 }
